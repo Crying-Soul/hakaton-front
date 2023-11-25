@@ -12,6 +12,7 @@
             window.location.href = "../index.html";
         }
     </script>
+    
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
@@ -203,42 +204,7 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="./schedule.html">
-                        <i class="uil uil-schedule"></i>
-                        <span class="link-name">Расписание</span>
-                    </a></li>
-                    <li class="active-menu-link"><a href="./diary.html">
-                        <i class="uil uil-book-open"></i>
-                        <span class="link-name">Электронный дневник</span>
-                    </a></li>
-                <li><a href="./teachers.html">
-                        <i class="uil uil-user-square"></i>
-                        <span class="link-name">Преподаватели</span>
-                    </a></li>
-                <li><a href="./admins.html">
-                        <i class="uil uil-user-plus"></i>
-                        <span class="link-name">Админы</span>
-                    </a></li>
-                <li><a href="./students.html">
-                        <i class="uil uil-book-reader"></i>
-                        <span class="link-name">Обучающиеся</span>
-                    </a></li>
-                <li><a href="./news.html">
-                        <i class="uil uil-newspaper"></i>
-                        <span class="link-name">Новости</span>
-                    </a></li>
-                <li><a href="./messages.html">
-                        <i class="uil uil-comments"></i>
-                        <span class="link-name">Сообщения</span>
-                    </a></li>
-                <li><a href="#">
-                        <button class="trigger" data-modal-trigger="trigger-1"
-                            style="background: transparent; padding: 0; margin: 0; border: 0; width: 100%; display: flex;">
-                            <i class="uil uil-user"></i>
-                            <span class="link-name">Аккаунт</span>
-                        </button>
-                    </a>
-                </li>
+               
             </ul>
 
             <ul class="logout-mode">
@@ -430,7 +396,12 @@
     </div>
     </footer>
 
-
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="../script/roles.js"></script>
     <script>
 
         const body = document.querySelector("body"),

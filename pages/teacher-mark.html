@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "../index.html";
+      }
+    </script>
+
+    <style>
+      .account-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .account-list li {
+        margin-bottom: 10px;
+      }
+
+      .account-list span {
+        font-weight: bold;
+        margin-right: 5px;
+        color: #4285f4;
+      }
+
+      .modal-header {
+        color: #0e4bf1be;
+        margin-bottom: 20px;
+      }
+      ul:hover {
+        cursor: pointer;
+      }
+      .container {
+        background-color: #ffffff;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .group {
+        list-style: none;
+        margin: 0;
+        padding: 20px;
+        font-size: 18px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .group:hover {
+        background-color: #3498db;
+        color: #ffffff;
+        transform: scale(1.05);
+      }
+
+      .subgroup {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        padding-left: 20px;
+        transition: max-height 0.5s, opacity 0.5s;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .group.active .subgroup {
+        max-height: 1000px;
+        opacity: 1;
+      }
+
+      .student {
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+        cursor: pointer;
+        width: fit-content;
+        border-radius: 10px;
+      }
+
+      .student:hover {
+        background-color: #0e4bf1be;
+        color: #ffffff;
+        transform: scale(1.05);
+      }
+      .form-container {
+        background-color: #ffffff; /* Белый цвет фона формы */
+        border: 2px solid #3498db; /* Синий цвет рамки формы */
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .form-container label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .form-container input,
+      .form-container textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+      }
+
+      .form-container button {
+        background-color: #3498db; /* Синий цвет кнопки */
+        color: #ffffff; /* Белый цвет текста на кнопке */
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .form-container button:hover {
+        background-color: #2980b9; /* Цвет кнопки при наведении */
+      }
+    </style>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <title>Leader Dashboard Panel</title>
+  </head>
+
+  <body style="overflow-x: hidden">
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="../images/logo.jpg" alt="" />
+        </div>
+
+        <span class="logo_name">Your school name</span>
+      </div>
+
+      <div class="menu-items">
+        <ul class="nav-links"></ul>
+
+        <ul class="logout-mode">
+          <li>
+            <a
+              href="#"
+              onclick="localStorage.removeItem('token'); window.location.reload();"
+            >
+              <i class="uil uil-signout"></i>
+              <span class="link-name">Выйти</span>
+            </a>
+          </li>
+
+          <li class="mode">
+            <a href="#">
+              <i class="uil uil-moon"></i>
+              <span class="link-name">Ночной режим</span>
+            </a>
+
+            <div class="mode-toggle">
+              <span class="switch"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="modal" data-modal="trigger-1">
+      <article class="content-wrapper">
+        <button class="close"></button>
+        <header class="modal-header">
+          <h2>Информация об аккаунте</h2>
+        </header>
+        <div class="content">
+          <ul class="account-list">
+            <li><span>Имя пользователя:</span> exampleUser</li>
+            <li><span>Email:</span> example@email.com</li>
+            <li><span>Пароль:</span> password</li>
+            <li><span>Id:</span> 7123863781678</li>
+            <li><span>Роль:</span> user</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="modal" data-modal="trigger-3">
+      <article class="content-wrapper" style="background-color: #4285f4">
+        <button class="close"></button>
+        <header class="modal-header">
+          <h2 style="color: white">Добавить оценку</h2>
+        </header>
+        <div class="content">
+          <div class="form-container">
+            <form id="gradeForm">
+              <label for="grade">Оценка:</label>
+              <input
+                type="number"
+                id="grade"
+                name="value"
+                min="1"
+                max="5"
+                required
+              />
+
+              <label for="comment">Комментарий:</label>
+              <textarea id="comment" name="comment" rows="4"></textarea>
+
+              <label>
+                <input type="checkbox" id="hideGrade" /> Отсутствовал на уроке
+              </label>
+
+              <button type="submit">Добавить оценку</button>
+            </form>
+          </div>
+        </div>
+      </article>
+    </div>
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Поиск по сайту..." />
+        </div>
+      </div>
+
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Выставление оценки</span>
+          </div>
+
+          <div class="container" id="container"></div>
+        </div>
+      </div>
+    </section>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap"
+      rel="stylesheet"
+    />
+
+    <div class="footer">
+      <div class="row">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-youtube"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+      </div>
+
+      <div class="row">
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Our Services</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Career</a></li>
+        </ul>
+      </div>
+
+      <div class="row">&copy; 2023 Музыкальная школа. Все права защищены.</div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../script/roles.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const groups = document.querySelectorAll(".group");
+
+        groups.forEach((group) => {
+          group.addEventListener("click", function (event) {
+            if (
+              !event.target.classList.contains("subgroup") &&
+              !event.target.classList.contains("student")
+            ) {
+              event.preventDefault();
+              this.classList.toggle("active");
+            }
+          });
+        });
+      });
+      const gradeForm = document.getElementById("gradeForm");
+
+      const hideGradeCheckbox = document.getElementById("hideGrade");
+      const gradeInput = document.getElementById("grade");
+      const gradeBlock = document.querySelector("label[for=grade]");
+
+      hideGradeCheckbox.addEventListener("change", function () {
+        gradeInput.disabled = this.checked ? true : false;
+        gradeBlock.textContent = this.checked ? "Оценка: Н" : "Оценка: ";
+      });
+
+      gradeForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const studentId = localStorage.getItem("student-id");
+        const grade = hideGradeCheckbox.checked
+          ? "Н"
+          : document.getElementById("grade").value;
+        const comment = document.getElementById("comment").value;
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error(
+            "Токен отсутствует. Войдите в систему, чтобы добавлять оценки."
+          );
+          return;
+        }
+
+        fetch("http://127.0.0.1:3000/api/mark/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            studentId,
+            value: grade,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Данные успешно отправлены:", data);
+          })
+          .catch((error) => {
+            console.error("Ошибка при отправке данных:", error);
+          });
+      });
+
+      const buttons = document.querySelectorAll(".trigger[data-modal-trigger]");
+
+      for (let button of buttons) {
+        modalEvent(button);
+      }
+
+      function modalEvent(button) {
+        button.addEventListener("click", () => {
+          const trigger = button.getAttribute("data-modal-trigger");
+          // console.log('trigger', trigger)
+          const modal = document.querySelector(`[data-modal=${trigger}]`);
+
+          const contentWrapper = modal.querySelector(".content-wrapper");
+          const close = modal.querySelector(".close");
+
+          close.addEventListener("click", () => modal.classList.remove("open"));
+          modal.addEventListener("click", () => modal.classList.remove("open"));
+          contentWrapper.addEventListener("click", (e) => e.stopPropagation());
+
+          modal.classList.toggle("open");
+        });
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("container");
+
+        // Получение токена из localStorage
+        const token = localStorage.getItem("token");
+
+        // Проверка наличия токена
+        if (!token) {
+          console.error(
+            "Токен отсутствует. Войдите в систему, чтобы получить данные."
+          );
+          return;
+        }
+
+        // URL API
+        const apiUrl = "http://localhost:3000/api/mark/getGroups";
+
+        // Опции для запроса
+        const options = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        };
+
+        // Запрос данных с использованием fetch
+        fetch(apiUrl, options)
+          .then((response) => response.json())
+          .then((data) => {
+            data.groups.forEach((groupData) => {
+              const groupElement = document.createElement("ul");
+              groupElement.classList.add("group");
+              groupElement.textContent = groupData.name;
+
+              const subgroupElement = document.createElement("ul");
+              subgroupElement.classList.add("subgroup");
+              let studCounter = 1;
+              groupData.students.forEach((studentData) => {
+                const studentElement = document.createElement("li");
+                studentElement.classList.add("student", "trigger");
+                studentElement.setAttribute("data-id", studentData.id);
+                studentElement.addEventListener("click", (e) => {
+                  localStorage.setItem("student-id", studentData.id);
+                });
+                studentElement.setAttribute("data-modal-trigger", `trigger-3`);
+                modalEvent(studentElement);
+
+                studentElement.textContent = `№${studCounter++} ${
+                  studentData.surname
+                } ${studentData.name}`;
+                subgroupElement.appendChild(studentElement);
+              });
+
+              groupElement.appendChild(subgroupElement);
+              container.appendChild(groupElement);
+
+              groupElement.addEventListener("click", function (event) {
+                if (
+                  !event.target.classList.contains("subgroup") &&
+                  !event.target.classList.contains("student")
+                ) {
+                  event.preventDefault();
+
+                  this.classList.toggle("active");
+                }
+              });
+            });
+          })
+          .catch((error) => {
+            console.error("Ошибка при получении данных:", error);
+          });
+      });
+
+      const body = document.querySelector("body"),
+        modeToggle = body.querySelector(".mode-toggle");
+      sidebar = body.querySelector("nav");
+      sidebarToggle = body.querySelector(".sidebar-toggle");
+
+      let getMode = localStorage.getItem("mode");
+      if (getMode && getMode === "dark") {
+        body.classList.toggle("dark");
+      }
+
+      let getStatus = localStorage.getItem("status");
+      if (getStatus && getStatus === "close") {
+        sidebar.classList.toggle("close");
+      }
+
+      modeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        if (body.classList.contains("dark")) {
+          localStorage.setItem("mode", "dark");
+        } else {
+          localStorage.setItem("mode", "light");
+        }
+      });
+
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        if (sidebar.classList.contains("close")) {
+          localStorage.setItem("status", "close");
+        } else {
+          localStorage.setItem("status", "open");
+        }
+      });
+    </script>
+  </body>
+</html>
