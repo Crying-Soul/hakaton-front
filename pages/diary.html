@@ -120,81 +120,7 @@
             border: 1rem solid rgba(0, 0, 0, 0.1);
         }
 
-        .trigger:hover {
-            cursor: pointer;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 0vh;
-            background-color: transparent;
-            overflow: hidden;
-            transition: background-color 0.25s ease;
-            z-index: 9999;
-        }
-
-        .modal.open {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            transition: background-color 0.25s;
-        }
-
-        .modal.open>.content-wrapper {
-            transform: scale(1);
-        }
-
-        .modal .content-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            width: 400px;
-            margin: 0;
-            padding: 2.5rem;
-            background-color: white;
-            border-radius: 0.3125rem;
-            box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.5);
-            transform: scale(0);
-            transition: transform 0.25s;
-            transition-delay: 0.15s;
-        }
-
-        .modal .content-wrapper .close {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            border: none;
-            background-color: transparent;
-            font-size: 1.5rem;
-            transition: 0.25s linear;
-        }
-
-        .modal .content-wrapper .close:before,
-        .modal .content-wrapper .close:after {
-            position: absolute;
-            content: "";
-            width: 1.25rem;
-            height: 0.125rem;
-            background-color: black;
-            transform: rotate(45deg);
-        }
-
-        .modal .content-wrapper .close:before {
-            transform: rotate(-45deg);
-        }
+       
 
         .account-list {
             list-style-type: none;
@@ -214,6 +140,14 @@
         .modal-header {
             color: #0e4bf1be;
             margin-bottom: 20px;
+        }
+        body.dark .grades-container{
+            background-color: #3a3b3c;
+            color: #ccc;
+        }
+        body.dark .card__body, body.dark .card__footer {
+            background-color: #4d4c4c;
+            color: #ccc;
         }
 
         .grades-container {
@@ -273,7 +207,7 @@
                         <i class="uil uil-schedule"></i>
                         <span class="link-name">Расписание</span>
                     </a></li>
-                <li><a href="./diary.html">
+                    <li class="active-menu-link"><a href="./diary.html">
                         <i class="uil uil-book-open"></i>
                         <span class="link-name">Электронный дневник</span>
                     </a></li>
