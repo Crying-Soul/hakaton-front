@@ -63,7 +63,7 @@ if (current_role == "teacher") {
 </a>
 </li>
   `);
-}else if (current_role == "parent") {
+} else if (current_role == "parent") {
   $("ul.nav-links").html(`
   <li><a href="./schedule.html">
   <i class="uil uil-schedule"></i>
@@ -90,8 +90,7 @@ if (current_role == "teacher") {
 </a>
 </li>
   `);
-}
-else if (current_role == "child") {
+} else if (current_role == "child") {
   $("ul.nav-links").html(`
   <li><a href="./schedule.html">
   <i class="uil uil-schedule"></i>
@@ -120,3 +119,7 @@ else if (current_role == "child") {
   `);
 }
 
+const logo = document.querySelector(".logo-name");
+logo.addEventListener("click", (e) => {
+  location.href = `${localStorage.getItem('role')}-lk.html`;
+});

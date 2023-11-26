@@ -918,7 +918,11 @@ body.dark .footer {
 .trigger:hover {
   cursor: pointer;
 }
-
+.logo-name:hover >*{
+  cursor: pointer;
+  font-size: 23px !important;
+  transition: all ease .5s;
+}
 .modal {
   position: fixed;
   top: 0;
