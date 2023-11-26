@@ -387,7 +387,7 @@
                     <article class="content-wrapper" style="background-color: #4285f4">
                         <button class="close"></button>
                         <header class="modal-header">
-                            <h2 style="color: white">Добавить ученика</h2>
+                            <h2 style="color: white">Добавить родителя</h2>
                         </header>
                         <div class="content">
                             <form id="createAdmin" class="custom-form">
@@ -402,21 +402,19 @@
 
                                 <label for="phone">Телефон:</label>
                                 <input type="tel" id="phone" name="phone" required />
-                                <label for="groups">Группа: </label>
-                                <input type="text" id="groups" name="subject" placeholder="BC1" required />
-                                <label for="great">Класс: </label>
-                                <input type="text" id="great" name="great" required />
-                                <label for="instrument">Инструмент </label>
-                                <input type="text" id="instrument" name="instrument" required />
+                                <label for="students">Дети (id): </label>
+                                <input type="text" id="students" name="students"
+                                    placeholder="18726378126,1892378912,123..." required />
+
                                 <button type="submit" style="background-color: #3385ff">
-                                    Создать ученика
+                                    Создать родителя
                                 </button>
                             </form>
                         </div>
                     </article>
                 </div>
                 <div class="table-users">
-                    <div class="header">Ученики</div>
+                    <div class="header">Родители</div>
 
                     <table cellspacing="0">
                         <tr>
@@ -466,24 +464,21 @@
     <script src="../script/roles.js"></script>
 
     <script>
-        const apiUrl = "http://127.0.0.1:3000/api/leader/getStudent";
+        const apiUrl = "http://127.0.0.1:3000/api/leader/getParent";
 
         fetch(apiUrl, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json", // Указывайте тип контента, если это необходимо
+                "Content-Type": "application/json",
             },
         })
             .then((response) => response.json())
             .then((data) => {
-                // Найдите таблицу
                 const table = document.querySelector(".table-users table");
-
-                // Создайте строки таблицы на основе данных JSON
                 data.forEach((item) => {
                     const row = document.createElement("tr");
 
-                    // Создайте ячейки для каждого столбца
+
                     const pictureCell = document.createElement("td");
                     pictureCell.innerHTML = `<img src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj" alt="" />`;
                     row.appendChild(pictureCell);
@@ -583,11 +578,9 @@
                 name: e.target[0].value,
                 surname: e.target[1].value,
                 email: e.target[2].value,
-                role: "Student",
+                role: "Parent",
                 phone: e.target[3].value,
-                great: e.target[5].value,
-                group: e.target[4].value,
-                instrument: e.target[6].value
+                id: e.target[4].value.split()
 
 
             });
@@ -601,11 +594,12 @@
             fetch("http://127.0.0.1:3000/api/leader/createUser", requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
+                    // console.log(result)
                     window.location.reload();
                 })
                 .catch((error) => console.log("error", error));
         });
-        let admins = [];
+     
     </script>
 </body>
 

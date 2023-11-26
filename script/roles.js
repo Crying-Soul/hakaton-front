@@ -29,13 +29,18 @@ if (current_role == "teacher") {
   `);
 } else if (current_role == "leader") {
   $("ul.nav-links").html(`
+
+<li><a href="./admins.html">
+  <i class="uil uil-user-plus"></i>
+  <span class="link-name">Админы</span>
+</a></li>
 <li><a href="./teachers.html">
   <i class="uil uil-user-square"></i>
   <span class="link-name">Преподаватели</span>
 </a></li>
-<li><a href="./admins.html">
-  <i class="uil uil-user-plus"></i>
-  <span class="link-name">Админы</span>
+<li><a href="./parents.html">
+<i class="uil uil-house-user"></i>
+  <span class="link-name">Родители</span>
 </a></li>
 <li><a href="./students.html">
   <i class="uil uil-book-reader"></i>
