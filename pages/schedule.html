@@ -12,10 +12,8 @@
             window.location.href = "../index.html";
         }
     </script>
-    
-    <style>
-        
 
+    <style>
         .account-list {
             list-style-type: none;
             padding: 0;
@@ -54,11 +52,12 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-               
+
             </ul>
 
             <ul class="logout-mode">
-                <li><a href="#" onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
+                <li><a href="#"
+                        onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Выйти</span>
                     </a></li>
@@ -84,11 +83,7 @@
             </header>
             <div class="content">
                 <ul class="account-list">
-                    <li><span>Имя пользователя:</span> exampleUser</li>
-                    <li><span>Email:</span> example@email.com</li>
-                    <li><span>Пароль:</span> password</li>
-                    <li><span>Id:</span> 7123863781678</li>
-                    <li><span>Роль:</span> user</li>
+         
 
                 </ul>
             </div>
@@ -215,12 +210,9 @@
         </div>
     </div>
     </footer>
-    <script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="../script/roles.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../script/roles.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
 
@@ -256,7 +248,7 @@
                 localStorage.setItem("status", "open");
             }
         });
-        
+
         const buttons = document.querySelectorAll('.trigger[data-modal-trigger]');
 
         for (let button of buttons) {

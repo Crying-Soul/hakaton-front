@@ -121,5 +121,42 @@ if (current_role == "teacher") {
 
 const logo = document.querySelector(".logo-name");
 logo.addEventListener("click", (e) => {
-  location.href = `${localStorage.getItem('role')}-lk.html`;
+  location.href = `${localStorage.getItem("role")}-lk.html`;
 });
+
+
+
+var requestOptions = {
+  method: "GET",
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+    "Content-Type": "application/json",
+  },
+};
+
+// Выполнение запроса fetch
+fetch("http://127.0.0.1:3000/api/getInfo", requestOptions)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  })
+  .then((apiData) => {
+   
+    function addListItem(label, value) {
+      var li = document.createElement("li");
+      li.innerHTML = `<span>${label}:</span> ${value}`;
+      document.querySelector(".account-list").appendChild(li);
+    }
+
+    // Заполнение данными из API
+    addListItem("Имя пользователя", apiData.name);
+    addListItem("Email", apiData.email);
+    addListItem("Phone", apiData.phone);
+    addListItem("Id", apiData.id);
+    addListItem("Роль", apiData.role);
+  })
+  .catch((error) => {
+    console.error("There has been a problem with your fetch operation:", error);
+  });

@@ -97,5 +97,7 @@ $(document).ready(function () {
         }
       );
     });
-    
+    if (localStorage.getItem('token')) {
+      location.href = `pages/${localStorage.getItem('role')}-lk.html`
+    }
 });
