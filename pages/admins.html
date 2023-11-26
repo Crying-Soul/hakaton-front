@@ -1,689 +1,608 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      const token = localStorage.getItem("token");
-      if (!token) {
-        window.location.href = "../index.html";
-      }
-    </script>
-    <style>
-      body * {
-        box-sizing: border-box;
-      }
-      table * {
-        transition: all ease 0.5s;
-      }
-      .header {
-        background-color: #0e4bf1be;
-        color: white;
-        font-size: 1.5em;
-        padding: 1rem;
-        text-align: center;
-        text-transform: uppercase;
-        transition: all ease 0.5s;
-      }
-      body.dark .header {
-        transition: all ease 0.5s;
-        background-color: #242526;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "../index.html";
+    }
+  </script>
+  <style>
+    body * {
+      box-sizing: border-box;
+    }
+
+    table * {
+      transition: all ease 0.5s;
+    }
+
+    .header {
+      background-color: #0e4bf1be;
+      color: white;
+      font-size: 1.5em;
+      padding: 1rem;
+      text-align: center;
+      text-transform: uppercase;
+      transition: all ease 0.5s;
+    }
+
+    body.dark .header {
+      transition: all ease 0.5s;
+      background-color: #242526;
+    }
+
+    img {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+    }
+
+    body.dark img {
+      filter: brightness(60%);
+      border: 1px solid #707070;
+    }
+
+    .table-users {
+      border: 1px solid #707070;
+      border-radius: 10px;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+      max-width: calc(100% - 2em);
+      margin: 1em auto;
+      overflow: hidden;
+      width: 800px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table td,
+    table th {
+      color: #707070;
+      padding: 10px;
+    }
+
+    table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table td:last-child {
+      font-size: 0.95em;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #4286f480;
+      font-weight: 300;
+    }
+
+    body.dark table th {
+      background-color: #7070701f;
+
+      font-weight: 300;
+    }
+
+    table tr:nth-child(2n) {
+      background-color: white;
+    }
+
+    body.dark table tr:nth-child(2n) {
+      background-color: #3a3b3c;
+    }
+
+    table tr:nth-child(2n + 1) {
+      background-color: #4286f43a;
+    }
+
+    body.dark table tr:nth-child(2n + 1) {
+      background-color: #7070701f;
+    }
+
+    body.dark table * {
+      color: #8a8a8a;
+    }
+
+    @media screen and (max-width: 700px) {
+
+      table,
+      tr,
+      td {
+        display: block;
       }
 
-      img {
-        border-radius: 50%;
-        height: 60px;
-        width: 60px;
-      }
-      body.dark img {
-        filter: brightness(60%);
-        border: 1px solid #707070;
+      td:first-child {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100px;
       }
 
-      .table-users {
-        border: 1px solid #707070;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-        max-width: calc(100% - 2em);
-        margin: 1em auto;
-        overflow: hidden;
-        width: 800px;
-      }
-
-      table {
-        width: 100%;
-      }
-
-      table td,
-      table th {
-        color: #707070;
-        padding: 10px;
-      }
-
-      table td {
-        text-align: center;
-        vertical-align: middle;
-      }
-
-      table td:last-child {
-        font-size: 0.95em;
-        line-height: 1.4;
+      td:not(:first-child) {
+        clear: both;
+        margin-left: 100px;
+        padding: 4px 20px 4px 90px;
+        position: relative;
         text-align: left;
       }
 
-      table th {
-        background-color: #4286f480;
-        font-weight: 300;
+      td:not(:first-child):before {
+        color: #91ced4;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
       }
 
-      body.dark table th {
-        background-color: #7070701f;
-
-        font-weight: 300;
+      td:nth-child(2):before {
+        content: "Name:";
       }
 
-      table tr:nth-child(2n) {
-        background-color: white;
+      td:nth-child(3):before {
+        content: "Email:";
       }
 
-      body.dark table tr:nth-child(2n) {
-        background-color: #3a3b3c;
+      td:nth-child(4):before {
+        content: "Phone:";
       }
 
-      table tr:nth-child(2n + 1) {
-        background-color: #4286f43a;
+      td:nth-child(5):before {
+        content: "Comments:";
       }
 
-      body.dark table tr:nth-child(2n + 1) {
-        background-color: #7070701f;
+      tr {
+        padding: 10px 0;
+        position: relative;
       }
 
-      body.dark table * {
-        color: #8a8a8a;
+      tr:first-child {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .header {
+        background-color: transparent;
+        color: white;
+        font-size: 2em;
+        font-weight: 700;
+        padding: 0;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
       }
 
-      @media screen and (max-width: 700px) {
-        table,
-        tr,
-        td {
-          display: block;
-        }
-
-        td:first-child {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 100px;
-        }
-
-        td:not(:first-child) {
-          clear: both;
-          margin-left: 100px;
-          padding: 4px 20px 4px 90px;
-          position: relative;
-          text-align: left;
-        }
-
-        td:not(:first-child):before {
-          color: #91ced4;
-          content: "";
-          display: block;
-          left: 0;
-          position: absolute;
-        }
-
-        td:nth-child(2):before {
-          content: "Name:";
-        }
-
-        td:nth-child(3):before {
-          content: "Email:";
-        }
-
-        td:nth-child(4):before {
-          content: "Phone:";
-        }
-
-        td:nth-child(5):before {
-          content: "Comments:";
-        }
-
-        tr {
-          padding: 10px 0;
-          position: relative;
-        }
-
-        tr:first-child {
-          display: none;
-        }
+      img {
+        border: 3px solid;
+        border-color: #daeff1;
+        height: 100px;
+        margin: 0.5rem 0;
+        width: 100px;
       }
 
-      @media screen and (max-width: 500px) {
-        .header {
-          background-color: transparent;
-          color: white;
-          font-size: 2em;
-          font-weight: 700;
-          padding: 0;
-          text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        img {
-          border: 3px solid;
-          border-color: #daeff1;
-          height: 100px;
-          margin: 0.5rem 0;
-          width: 100px;
-        }
-
-        td:first-child {
-          background-color: #c8e7ea;
-          border-bottom: 1px solid #91ced4;
-          border-radius: 10px 10px 0 0;
-          position: relative;
-          top: 0;
-          transform: translateY(0);
-          width: 100%;
-        }
-
-        td:not(:first-child) {
-          margin: 0;
-          padding: 5px 1em;
-          width: 100%;
-        }
-
-        td:not(:first-child):before {
-          font-size: 0.8em;
-          padding-top: 0.3em;
-          position: relative;
-        }
-
-        td:last-child {
-          padding-bottom: 1rem !important;
-        }
-
-        tr {
-          background-color: white !important;
-          border: 1px solid #0e4bf1be;
-          border-radius: 10px;
-          box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-          margin: 0.5rem 0;
-          padding: 0;
-        }
-
-        .table-users {
-          border: none;
-          box-shadow: none;
-          overflow: visible;
-        }
+      td:first-child {
+        background-color: #c8e7ea;
+        border-bottom: 1px solid #91ced4;
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        top: 0;
+        transform: translateY(0);
+        width: 100%;
       }
 
-      .account-list {
-        list-style-type: none;
+      td:not(:first-child) {
+        margin: 0;
+        padding: 5px 1em;
+        width: 100%;
+      }
+
+      td:not(:first-child):before {
+        font-size: 0.8em;
+        padding-top: 0.3em;
+        position: relative;
+      }
+
+      td:last-child {
+        padding-bottom: 1rem !important;
+      }
+
+      tr {
+        background-color: white !important;
+        border: 1px solid #0e4bf1be;
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        margin: 0.5rem 0;
         padding: 0;
       }
 
-      .account-list li {
-        margin-bottom: 10px;
-      }
-
-      .account-list span {
-        font-weight: bold;
-        margin-right: 5px;
-        color: #4285f4;
-      }
-
-      .modal-header {
-        color: #0e4bf1be;
-        margin-bottom: 20px;
-      }
-      button {
-        padding: 10px 15px;
+      .table-users {
         border: none;
-        cursor: pointer;
-        border-radius: 5px;
+        box-shadow: none;
+        overflow: visible;
       }
+    }
 
-      .delete-button {
-        background-color: #ff3333; /* Красный цвет для кнопки удаления */
-        color: #ffffff; /* Белый текст */
-      }
+    .account-list {
+      list-style-type: none;
+      padding: 0;
+    }
 
-      .edit-button {
-        background-color: #3385ff; /* Синий цвет для кнопки изменения */
-        color: #ffffff; /* Белый текст */
-      }
-      .add-button {
-        position: fixed;
-        right: 5vw;
-        z-index: 9999;
-        top: 15%;
-        background-color: #00cc00; /* Зеленый цвет для кнопки добавления */
-        color: #ffffff; /* Белый текст */
-      }
-      .custom-form {
-        background-color: #ffffff; /* Белый цвет для формы */
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-      }
+    .account-list li {
+      margin-bottom: 10px;
+    }
 
-      .custom-form label {
-        display: block;
-        margin-bottom: 8px;
-      }
+    .account-list span {
+      font-weight: bold;
+      margin-right: 5px;
+      color: #4285f4;
+    }
 
-      .custom-form input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        box-sizing: border-box;
-        border: 1px solid #cccccc; /* Более мягкая граница */
-        border-radius: 5px;
-      }
+    .modal-header {
+      color: #0e4bf1be;
+      margin-bottom: 20px;
+    }
 
-      .custom-form button {
-        background-color: #333333; /* Темно-серый цвет для кнопки */
-        color: #ffffff; /* Белый текст */
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
-    <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../css/style.css" />
+    button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-    <!----===== Iconscout CSS ===== -->
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
-    />
+    .delete-button {
+      background-color: #ff3333;
+      /* Красный цвет для кнопки удаления */
+      color: #ffffff;
+      /* Белый текст */
+    }
 
-    <title>Admins list</title>
-  </head>
+    .edit-button {
+      background-color: #3385ff;
+      /* Синий цвет для кнопки изменения */
+      color: #ffffff;
+      /* Белый текст */
+    }
 
-  <body style="overflow-x: hidden">
-    <nav>
-      <div class="logo-name">
-        <div class="logo-image">
-          <img src="../images/logo.jpg" alt="" />
-        </div>
+    .add-button {
+      background-color: #00cc00;
+      color: #ffffff;
+   
+    }
 
-        <span class="logo_name">Your school name</span>
+    .custom-form {
+      background-color: #ffffff;
+      /* Белый цвет для формы */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .custom-form label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .custom-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #cccccc;
+      /* Более мягкая граница */
+      border-radius: 5px;
+    }
+
+    .custom-form button {
+      background-color: #333333;
+      /* Темно-серый цвет для кнопки */
+      color: #ffffff;
+      /* Белый текст */
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!----===== Iconscout CSS ===== -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+  <title>Admins list</title>
+</head>
+
+<body style="overflow-x: hidden">
+  <nav>
+    <div class="logo-name">
+      <div class="logo-image">
+        <img src="../images/logo.jpg" alt="" />
       </div>
 
-      <div class="menu-items">
-        <ul class="nav-links">
-          <li>
-            <a href="./schedule.html">
-              <i class="uil uil-schedule"></i>
-              <span class="link-name">Расписание</span>
-            </a>
-          </li>
-          <li>
-            <a href="./diary.html">
-              <i class="uil uil-book-open"></i>
-              <span class="link-name">Электронный дневник</span>
-            </a>
-          </li>
-          <li>
-            <a href="./teachers.html">
-              <i class="uil uil-user-square"></i>
-              <span class="link-name">Преподаватели</span>
-            </a>
-          </li>
-          <li class="active-menu-link">
-            <a href="./admins.html">
-              <i class="uil uil-user-plus"></i>
-              <span class="link-name">Админы</span>
-            </a>
-          </li>
-          <li>
-            <a href="./students.html">
-              <i class="uil uil-book-reader"></i>
-              <span class="link-name">Обучающиеся</span>
-            </a>
-          </li>
-          <li>
-            <a href="./news.html">
-              <i class="uil uil-newspaper"></i>
-              <span class="link-name">Новости</span>
-            </a>
-          </li>
-          <li>
-            <a href="./messages.html">
-              <i class="uil uil-comments"></i>
-              <span class="link-name">Сообщения</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <button
-                class="trigger"
-                data-modal-trigger="trigger-1"
-                style="
-                  background: transparent;
-                  padding: 0;
-                  margin: 0;
-                  border: 0;
-                  width: 100%;
-                  display: flex;
-                "
-              >
-                <i class="uil uil-user"></i>
-                <span class="link-name">Аккаунт</span>
-              </button>
-            </a>
-          </li>
+      <span class="logo_name">Your school name</span>
+    </div>
+
+    <div class="menu-items">
+      <ul class="nav-links">
+        
+      </ul>
+
+      <ul class="logout-mode">
+        <li>
+          <a href="#"
+            onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
+            <i class="uil uil-signout"></i>
+            <span class="link-name">Выйти</span>
+          </a>
+        </li>
+
+        <li class="mode">
+          <a href="#">
+            <i class="uil uil-moon"></i>
+            <span class="link-name">Ночной режим</span>
+          </a>
+
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="modal" data-modal="trigger-1">
+    <article class="content-wrapper">
+      <button class="close"></button>
+      <header class="modal-header">
+        <h2>Информация об аккаунте</h2>
+      </header>
+      <div class="content">
+        <ul class="account-list">
+          <li><span>Имя пользователя:</span> exampleUser</li>
+          <li><span>Email:</span> example@email.com</li>
+          <li><span>Пароль:</span> password</li>
+          <li><span>Id:</span> 7123863781678</li>
+          <li><span>Роль:</span> user</li>
         </ul>
+      </div>
+    </article>
+  </div>
+  <section class="dashboard">
+    <div class="top">
+      <i class="uil uil-bars sidebar-toggle"></i>
+      <div class="search-box">
+        <i class="uil uil-search"></i>
+        <input type="text" placeholder="Поиск по сайту..." />
+      </div>
+    </div>
+    <div class="dash-content">
+      <div class="overview">
+        
+        <div class="modal modal-blue" data-modal="trigger-2">
+          <article class="content-wrapper" style="background-color: #4285f4">
+            <button class="close"></button>
+            <header class="modal-header">
+              <h2 style="color: white">Добавить админа</h2>
+            </header>
+            <div class="content">
+              <form id="createAdmin" class="custom-form">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required />
 
-        <ul class="logout-mode">
-          <li>
-            <a
-              href="#"
-              onclick="localStorage.removeItem('token'); window.location.reload();"
-            >
-              <i class="uil uil-signout"></i>
-              <span class="link-name">Выйти</span>
-            </a>
-          </li>
+                <label for="surname">Фамилия:</label>
+                <input type="text" id="surname" name="surname" required />
 
-          <li class="mode">
-            <a href="#">
-              <i class="uil uil-moon"></i>
-              <span class="link-name">Ночной режим</span>
-            </a>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
 
-            <div class="mode-toggle">
-              <span class="switch"></span>
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone" name="phone" required />
+
+                <button type="submit" style="background-color: #3385ff">
+                  Создать админа
+                </button>
+              </form>
             </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="modal" data-modal="trigger-1">
-      <article class="content-wrapper">
-        <button class="close"></button>
-        <header class="modal-header">
-          <h2>Информация об аккаунте</h2>
-        </header>
-        <div class="content">
-          <ul class="account-list">
-            <li><span>Имя пользователя:</span> exampleUser</li>
-            <li><span>Email:</span> example@email.com</li>
-            <li><span>Пароль:</span> password</li>
-            <li><span>Id:</span> 7123863781678</li>
-            <li><span>Роль:</span> user</li>
-          </ul>
+          </article>
         </div>
-      </article>
+        <div class="table-users">
+          <div class="header">Админы</div>
+
+          <table cellspacing="0">
+            <tr>
+              <th>Picture</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th width="230"><button class="add-button trigger" data-modal-trigger="trigger-2">
+                Добавить
+              </button></th>
+            </tr>
+
+
+          </table>
+        </div>
+      </div>
     </div>
-    <section class="dashboard">
-      <div class="top">
-        <i class="uil uil-bars sidebar-toggle"></i>
-        <div class="search-box">
-          <i class="uil uil-search"></i>
-          <input type="text" placeholder="Поиск по сайту..." />
-        </div>
-      </div>
-      <div class="dash-content">
-        <div class="overview">
-          <button class="add-button trigger" data-modal-trigger="trigger-2">
-            Добавить
-          </button>
-          <div class="modal modal-blue" data-modal="trigger-2">
-            <article class="content-wrapper" style="background-color: #4285f4">
-              <button class="close"></button>
-              <header class="modal-header">
-                <h2 style="color: white">Добавить админа</h2>
-              </header>
-              <div class="content">
-                <form id="createAdmin" class="custom-form">
-                  <label for="name">Имя:</label>
-                  <input type="text" id="name" name="name" required />
+  </section>
 
-                  <label for="surname">Фамилия:</label>
-                  <input type="text" id="surname" name="surname" required />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" name="email" required />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet" />
 
-                  <label for="phone">Телефон:</label>
-                  <input type="tel" id="phone" name="phone" required />
-
-                  <button type="submit" style="background-color: #3385ff">
-                    Создать админа
-                  </button>
-                </form>
-              </div>
-            </article>
-          </div>
-          <div class="table-users">
-            <div class="header">Админы</div>
-
-            <table cellspacing="0">
-              <tr>
-                <th>Picture</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th width="230">Функции</th>
-              </tr>
-
-              <tr>
-                <td>
-                  <img
-                    src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj"
-                    alt=""
-                  />
-                </td>
-                <td>Jane Doe</td>
-                <td>jane.doe@foo.com</td>
-                <td>01 800 2000</td>
-                <td
-                  style="display: flex; justify-content: center; margin-top: 6%"
-                >
-                  <button style="margin: 0 5px" class="edit-button">
-                    Изменить
-                  </button>
-                  <button class="delete-button">Удалить</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img
-                    src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj"
-                    alt=""
-                  />
-                </td>
-                <td>Jane Doe</td>
-                <td>jane.doe@foo.com</td>
-                <td>01 800 2000</td>
-                <td
-                  style="display: flex; justify-content: center; margin-top: 6%"
-                >
-                  <button style="margin: 0 5px" class="edit-button">
-                    Изменить
-                  </button>
-                  <button class="delete-button">Удалить</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img
-                    src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj"
-                    alt=""
-                  />
-                </td>
-                <td>Jane Doe</td>
-                <td>jane.doe@foo.com</td>
-                <td>01 800 2000</td>
-                <td
-                  style="display: flex; justify-content: center; margin-top: 6%"
-                >
-                  <button style="margin: 0 5px" class="edit-button">
-                    Изменить
-                  </button>
-                  <button class="delete-button">Удалить</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img
-                    src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj"
-                    alt=""
-                  />
-                </td>
-                <td>Jane Doe</td>
-                <td>jane.doe@foo.com</td>
-                <td>01 800 2000</td>
-                <td
-                  style="display: flex; justify-content: center; margin-top: 6%"
-                >
-                  <button style="margin: 0 5px" class="edit-button">
-                    Изменить
-                  </button>
-                  <button class="delete-button">Удалить</button>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap"
-      rel="stylesheet"
-    />
-
-    <div class="footer">
-      <div class="row">
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
-        <a href="#"><i class="fa fa-youtube"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-      </div>
-
-      <div class="row">
-        <ul>
-          <li><a href="#">Contact us</a></li>
-          <li><a href="#">Our Services</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Career</a></li>
-        </ul>
-      </div>
-
-      <div class="row">&copy; 2023 Музыкальная школа. Все права защищены.</div>
+  <div class="footer">
+    <div class="row">
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-instagram"></i></a>
+      <a href="#"><i class="fa fa-youtube"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
     </div>
 
-    <script>
-      const body = document.querySelector("body"),
-        modeToggle = body.querySelector(".mode-toggle");
-      sidebar = body.querySelector("nav");
-      sidebarToggle = body.querySelector(".sidebar-toggle");
+    <div class="row">
+      <ul>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Our Services</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Career</a></li>
+      </ul>
+    </div>
 
-      let getMode = localStorage.getItem("mode");
-      if (getMode && getMode === "dark") {
-        body.classList.toggle("dark");
-      }
+    <div class="row">&copy; 2023 Музыкальная школа. Все права защищены.</div>
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"
+></script>
+<script src="../script/roles.js"></script>
 
-      let getStatus = localStorage.getItem("status");
-      if (getStatus && getStatus === "close") {
-        sidebar.classList.toggle("close");
-      }
+  <script>
+    const apiUrl = "http://127.0.0.1:3000/api/leader/getAdmin";
 
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark");
-        if (body.classList.contains("dark")) {
-          localStorage.setItem("mode", "dark");
-        } else {
-          localStorage.setItem("mode", "light");
-        }
-      });
+    fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json", // Указывайте тип контента, если это необходимо
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Найдите таблицу
+        const table = document.querySelector(".table-users table");
 
-      sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-        if (sidebar.classList.contains("close")) {
-          localStorage.setItem("status", "close");
-        } else {
-          localStorage.setItem("status", "open");
-        }
-      });
+        // Создайте строки таблицы на основе данных JSON
+        data.forEach((item) => {
+          const row = document.createElement("tr");
 
-      const buttons = document.querySelectorAll(".trigger[data-modal-trigger]");
+          // Создайте ячейки для каждого столбца
+          const pictureCell = document.createElement("td");
+          pictureCell.innerHTML = `<img src="https://yt3.googleusercontent.com/ytc/AOPolaS9HfeV0B7M3lIkTQnUkT5o5yjqg1JR_q274oeRgg=s900-c-k-c0x00ffffff-no-rj" alt="" />`;
+          row.appendChild(pictureCell);
 
-      for (let button of buttons) {
-        modalEvent(button);
-      }
+          const nameCell = document.createElement("td");
+          nameCell.textContent = `${item.name} ${item.surname}`;
+          row.appendChild(nameCell);
 
-      function modalEvent(button) {
-        button.addEventListener("click", () => {
-          const trigger = button.getAttribute("data-modal-trigger");
-          // console.log('trigger', trigger)
-          const modal = document.querySelector(`[data-modal=${trigger}]`);
-          console.log("modal", modal);
-          const contentWrapper = modal.querySelector(".content-wrapper");
-          const close = modal.querySelector(".close");
+          const emailCell = document.createElement("td");
+          emailCell.textContent = item.email;
+          row.appendChild(emailCell);
 
-          close.addEventListener("click", () => modal.classList.remove("open"));
-          modal.addEventListener("click", () => modal.classList.remove("open"));
-          contentWrapper.addEventListener("click", (e) => e.stopPropagation());
+          const phoneCell = document.createElement("td");
+          phoneCell.textContent = item.phone;
+          row.appendChild(phoneCell);
 
-          modal.classList.toggle("open");
+          const functionsCell = document.createElement("td");
+          functionsCell.innerHTML = `
+        <div style="display: flex; justify-content: center; margin-top: 6%">
+          <button style="margin: 0 5px" class="edit-button">Изменить</button>
+          <button class="delete-button">Удалить</button>
+        </div>
+      `;
+          row.appendChild(functionsCell);
+
+          // Добавьте строку в таблицу
+          table.appendChild(row);
         });
+      })
+      .catch((error) =>
+        console.error("Error fetching data from API:", error)
+      );
+    const body = document.querySelector("body"),
+      modeToggle = body.querySelector(".mode-toggle");
+    sidebar = body.querySelector("nav");
+    sidebarToggle = body.querySelector(".sidebar-toggle");
+
+    let getMode = localStorage.getItem("mode");
+    if (getMode && getMode === "dark") {
+      body.classList.toggle("dark");
+    }
+
+    let getStatus = localStorage.getItem("status");
+    if (getStatus && getStatus === "close") {
+      sidebar.classList.toggle("close");
+    }
+
+    modeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      if (body.classList.contains("dark")) {
+        localStorage.setItem("mode", "dark");
+      } else {
+        localStorage.setItem("mode", "light");
       }
-      const form = document.getElementById("createAdmin");
+    });
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
+      if (sidebar.classList.contains("close")) {
+        localStorage.setItem("status", "close");
+      } else {
+        localStorage.setItem("status", "open");
+      }
+    });
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
-        myHeaders.append(
-          "Authorization",
-          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTYyMGMwMTYwMmU3YzE4Mjc2OWQwMTYiLCJlbWFpbCI6InczaHR0NG1rQGdtYWlsLmNvbSIsInJvbGUiOiJMZWFkZXIiLCJvcmdhbml6YXRpb24iOiJTY2hvb2wgMyIsImlhdCI6MTcwMDkyNDQzMiwiZXhwIjoxNzAxNTI5MjMyfQ.cZOmfXqImBHUoaM5dNYmUrAma7vhDSFmBhf5QRKU9Z4`
-        );
-        var raw = JSON.stringify({
-          name: e.target[0].value,
-          surname: e.target[1].value,
-          email: e.target[2].value,
-          role: "Admin",
-          phone: e.target[3].value,
-        });
+    const buttons = document.querySelectorAll(".trigger[data-modal-trigger]");
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+    for (let button of buttons) {
+      modalEvent(button);
+    }
 
-        fetch("http://127.0.0.1:3000/api/leader/createUser", requestOptions)
-          .then((response) => response.text())
-          .then((result) => {
-            
-            window.location.reload();
-          })
-          .catch((error) => console.log("error", error));
+    function modalEvent(button) {
+      button.addEventListener("click", () => {
+        const trigger = button.getAttribute("data-modal-trigger");
+        // console.log('trigger', trigger)
+        const modal = document.querySelector(`[data-modal=${trigger}]`);
+        console.log("modal", modal);
+        const contentWrapper = modal.querySelector(".content-wrapper");
+        const close = modal.querySelector(".close");
+
+        close.addEventListener("click", () => modal.classList.remove("open"));
+        modal.addEventListener("click", () => modal.classList.remove("open"));
+        contentWrapper.addEventListener("click", (e) => e.stopPropagation());
+
+        modal.classList.toggle("open");
       });
-      let admins = [];
-    </script>
-  </body>
+    }
+    const form = document.getElementById("createAdmin");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${localStorage.getItem('token')}`);
+      
+      var raw = JSON.stringify({
+        name: e.target[0].value,
+        surname: e.target[1].value,
+        email: e.target[2].value,
+        role: "Admin",
+        phone: e.target[3].value,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("http://127.0.0.1:3000/api/leader/createUser", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          window.location.reload();
+        })
+        .catch((error) => console.log("error", error));
+    });
+    let admins = [];
+  </script>
+</body>
+
 </html>

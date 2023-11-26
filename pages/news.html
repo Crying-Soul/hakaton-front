@@ -47,10 +47,13 @@
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-        body.dark .card,  body.dark .band h1{
+
+        body.dark .card,
+        body.dark .band h1 {
             background: #3a3b3c;
             color: #ccc;
         }
+
         .card {
             background: white;
             text-decoration: none;
@@ -137,6 +140,114 @@
             color: #0e4bf1be;
             margin-bottom: 20px;
         }
+
+        .add-news-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #ffffff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            outline: none;
+        }
+
+        .add-news-button:hover {
+            background-color: #2980b9;
+
+        }
+
+        .news-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            /* синий цвет фона формы */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            max-width: 340px;
+            max-height: 340px;
+            min-width: 150px;
+            min-height: 150px;
+        }
+
+        .news-form label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: black;
+        }
+
+        .news-form input,
+        .news-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ffffff;
+            /* белая обводка */
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            /* светло-серый цвет фона */
+            color: #333333;
+            /* цвет текста в полях ввода */
+        }
+
+        .news-form input:focus,
+        .news-form textarea:focus {
+            outline: none;
+            border-color: #2980b9;
+            /* измененный цвет при активации поля */
+        }
+
+        .news-form .file-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ffffff;
+            /* белая обводка */
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            /* светло-серый цвет фона */
+            color: #333333;
+            /* цвет текста */
+        }
+
+        .news-form .file-input:focus {
+            outline: none;
+            border-color: #2980b9;
+            /* измененный цвет при активации поля */
+        }
+
+        .news-form .submit-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #ffffff;
+            /* белый цвет кнопки */
+            color: #3498db;
+            /* синий цвет текста кнопки */
+            border: 1px solid #3498db;
+            /* синяя обводка */
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .news-form .submit-button:hover {
+            background-color: #3498db;
+            /* измененный цвет при наведении курсора */
+            color: #ffffff;
+            /* измененный цвет текста при наведении курсора */
+        }
     </style>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -156,11 +267,11 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                
             </ul>
 
             <ul class="logout-mode">
-                <li><a href="#" onclick="localStorage.removeItem('token'); window.location.reload();">
+                <li><a href="#"
+                        onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Выйти</span>
                     </a></li>
@@ -207,13 +318,35 @@
             </div>
 
         </div>
+        <div class="modal modal-blue" data-modal="trigger-2">
+            <article class="content-wrapper" style="background-color: #4285f4">
+                <button class="close"></button>
+                <header class="modal-header">
+                    <h2 style="color: white">Добавить ученика</h2>
+                </header>
+                <div class="content">
+                    <form class="news-form">
+                        <label for="title">Заголовок новости:</label>
+                        <input type="text" placeholder="Заголовок" id="title" name="title" required>
 
+                        <label for="content">Содержание новости:</label>
+                        <textarea id="content" placeholder="Расскажите о..." name="content" rows="4"
+                            required></textarea>
+                        <label for="file" style="margin-top: 10px;">Выберите файл:</label>
+                        <input type="file" id="file" name="file" class="file-input">
+
+                        <input style="margin: 10px 0;" type="submit" value="Опубликовать" class="submit-button">
+                    </form>
+                </div>
+            </article>
+        </div>
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
                     <span class="text">Новости</span>
                 </div>
+                <button class="trigger add-news-button" data-modal-trigger="trigger-2">Добавить новость</button>
                 <div class="band">
                     <div class="item-1">
                         <a href="https://design.tutsplus.com/articles/international-artist-feature-malaysia--cms-26852"
@@ -341,12 +474,9 @@
         </div>
     </div>
     </footer>
-    <script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="../script/roles.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../script/roles.js"></script>
     <script>
 
         const body = document.querySelector("body"),

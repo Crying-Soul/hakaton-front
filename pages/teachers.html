@@ -11,294 +11,302 @@
         window.location.href = "../index.html";
       }
     </script>
-    <style>
-      body * {
-        box-sizing: border-box;
-      }
-      table * {
-        transition: all ease 0.5s;
-      }
-      .header {
-        background-color: #0e4bf1be;
-        color: white;
-        font-size: 1.5em;
-        padding: 1rem;
-        text-align: center;
-        text-transform: uppercase;
-        transition: all ease 0.5s;
-      }
-      body.dark .header {
-        transition: all ease 0.5s;
-        background-color: #242526;
+   <style>
+    body * {
+      box-sizing: border-box;
+    }
+
+    table * {
+      transition: all ease 0.5s;
+    }
+
+    .header {
+      background-color: #0e4bf1be;
+      color: white;
+      font-size: 1.5em;
+      padding: 1rem;
+      text-align: center;
+      text-transform: uppercase;
+      transition: all ease 0.5s;
+    }
+
+    body.dark .header {
+      transition: all ease 0.5s;
+      background-color: #242526;
+    }
+
+    img {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+    }
+
+    body.dark img {
+      filter: brightness(60%);
+      border: 1px solid #707070;
+    }
+
+    .table-users {
+      border: 1px solid #707070;
+      border-radius: 10px;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+      max-width: calc(100% - 2em);
+      margin: 1em auto;
+      overflow: hidden;
+      width: 800px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table td,
+    table th {
+      color: #707070;
+      padding: 10px;
+    }
+
+    table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table td:last-child {
+      font-size: 0.95em;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #4286f480;
+      font-weight: 300;
+    }
+
+    body.dark table th {
+      background-color: #7070701f;
+
+      font-weight: 300;
+    }
+
+    table tr:nth-child(2n) {
+      background-color: white;
+    }
+
+    body.dark table tr:nth-child(2n) {
+      background-color: #3a3b3c;
+    }
+
+    table tr:nth-child(2n + 1) {
+      background-color: #4286f43a;
+    }
+
+    body.dark table tr:nth-child(2n + 1) {
+      background-color: #7070701f;
+    }
+
+    body.dark table * {
+      color: #8a8a8a;
+    }
+
+    @media screen and (max-width: 700px) {
+
+      table,
+      tr,
+      td {
+        display: block;
       }
 
-      img {
-        border-radius: 50%;
-        height: 60px;
-        width: 60px;
-      }
-      body.dark img {
-        filter: brightness(60%);
-        border: 1px solid #707070;
+      td:first-child {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100px;
       }
 
-      .table-users {
-        border: 1px solid #707070;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-        max-width: calc(100% - 2em);
-        margin: 1em auto;
-        overflow: hidden;
-        width: 800px;
-      }
-
-      table {
-        width: 100%;
-      }
-
-      table td,
-      table th {
-        color: #707070;
-        padding: 10px;
-      }
-
-      table td {
-        text-align: center;
-        vertical-align: middle;
-      }
-
-      table td:last-child {
-        font-size: 0.95em;
-        line-height: 1.4;
+      td:not(:first-child) {
+        clear: both;
+        margin-left: 100px;
+        padding: 4px 20px 4px 90px;
+        position: relative;
         text-align: left;
       }
 
-      table th {
-        background-color: #4286f480;
-        font-weight: 300;
+      td:not(:first-child):before {
+        color: #91ced4;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
       }
 
-      body.dark table th {
-        background-color: #7070701f;
-
-        font-weight: 300;
+      td:nth-child(2):before {
+        content: "Name:";
       }
 
-      table tr:nth-child(2n) {
-        background-color: white;
+      td:nth-child(3):before {
+        content: "Email:";
       }
 
-      body.dark table tr:nth-child(2n) {
-        background-color: #3a3b3c;
+      td:nth-child(4):before {
+        content: "Phone:";
       }
 
-      table tr:nth-child(2n + 1) {
-        background-color: #4286f43a;
+      td:nth-child(5):before {
+        content: "Comments:";
       }
 
-      body.dark table tr:nth-child(2n + 1) {
-        background-color: #7070701f;
+      tr {
+        padding: 10px 0;
+        position: relative;
       }
 
-      body.dark table * {
-        color: #8a8a8a;
+      tr:first-child {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .header {
+        background-color: transparent;
+        color: white;
+        font-size: 2em;
+        font-weight: 700;
+        padding: 0;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
       }
 
-      @media screen and (max-width: 700px) {
-        table,
-        tr,
-        td {
-          display: block;
-        }
-
-        td:first-child {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 100px;
-        }
-
-        td:not(:first-child) {
-          clear: both;
-          margin-left: 100px;
-          padding: 4px 20px 4px 90px;
-          position: relative;
-          text-align: left;
-        }
-
-        td:not(:first-child):before {
-          color: #91ced4;
-          content: "";
-          display: block;
-          left: 0;
-          position: absolute;
-        }
-
-        td:nth-child(2):before {
-          content: "Name:";
-        }
-
-        td:nth-child(3):before {
-          content: "Email:";
-        }
-
-        td:nth-child(4):before {
-          content: "Phone:";
-        }
-
-        td:nth-child(5):before {
-          content: "Comments:";
-        }
-
-        tr {
-          padding: 10px 0;
-          position: relative;
-        }
-
-        tr:first-child {
-          display: none;
-        }
+      img {
+        border: 3px solid;
+        border-color: #daeff1;
+        height: 100px;
+        margin: 0.5rem 0;
+        width: 100px;
       }
 
-      @media screen and (max-width: 500px) {
-        .header {
-          background-color: transparent;
-          color: white;
-          font-size: 2em;
-          font-weight: 700;
-          padding: 0;
-          text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        img {
-          border: 3px solid;
-          border-color: #daeff1;
-          height: 100px;
-          margin: 0.5rem 0;
-          width: 100px;
-        }
-
-        td:first-child {
-          background-color: #c8e7ea;
-          border-bottom: 1px solid #91ced4;
-          border-radius: 10px 10px 0 0;
-          position: relative;
-          top: 0;
-          transform: translateY(0);
-          width: 100%;
-        }
-
-        td:not(:first-child) {
-          margin: 0;
-          padding: 5px 1em;
-          width: 100%;
-        }
-
-        td:not(:first-child):before {
-          font-size: 0.8em;
-          padding-top: 0.3em;
-          position: relative;
-        }
-
-        td:last-child {
-          padding-bottom: 1rem !important;
-        }
-
-        tr {
-          background-color: white !important;
-          border: 1px solid #0e4bf1be;
-          border-radius: 10px;
-          box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-          margin: 0.5rem 0;
-          padding: 0;
-        }
-
-        .table-users {
-          border: none;
-          box-shadow: none;
-          overflow: visible;
-        }
+      td:first-child {
+        background-color: #c8e7ea;
+        border-bottom: 1px solid #91ced4;
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        top: 0;
+        transform: translateY(0);
+        width: 100%;
       }
 
-      .account-list {
-        list-style-type: none;
+      td:not(:first-child) {
+        margin: 0;
+        padding: 5px 1em;
+        width: 100%;
+      }
+
+      td:not(:first-child):before {
+        font-size: 0.8em;
+        padding-top: 0.3em;
+        position: relative;
+      }
+
+      td:last-child {
+        padding-bottom: 1rem !important;
+      }
+
+      tr {
+        background-color: white !important;
+        border: 1px solid #0e4bf1be;
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        margin: 0.5rem 0;
         padding: 0;
       }
 
-      .account-list li {
-        margin-bottom: 10px;
-      }
-
-      .account-list span {
-        font-weight: bold;
-        margin-right: 5px;
-        color: #4285f4;
-      }
-
-      .modal-header {
-        color: #0e4bf1be;
-        margin-bottom: 20px;
-      }
-      button {
-        padding: 10px 15px;
+      .table-users {
         border: none;
-        cursor: pointer;
-        border-radius: 5px;
+        box-shadow: none;
+        overflow: visible;
       }
+    }
 
-      .delete-button {
-        background-color: #ff3333; /* Красный цвет для кнопки удаления */
-        color: #ffffff; /* Белый текст */
-      }
+    .account-list {
+      list-style-type: none;
+      padding: 0;
+    }
 
-      .edit-button {
-        background-color: #3385ff; /* Синий цвет для кнопки изменения */
-        color: #ffffff; /* Белый текст */
-      }
-      .add-button {
-        position: fixed;
-        right: 5vw;
-        z-index: 9999;
-        top: 15%;
-        background-color: #00cc00; /* Зеленый цвет для кнопки добавления */
-        color: #ffffff; /* Белый текст */
-      }
-      .custom-form {
-        background-color: #ffffff; /* Белый цвет для формы */
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-      }
+    .account-list li {
+      margin-bottom: 10px;
+    }
 
-      .custom-form label {
-        display: block;
-        margin-bottom: 8px;
-      }
+    .account-list span {
+      font-weight: bold;
+      margin-right: 5px;
+      color: #4285f4;
+    }
 
-      .custom-form input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        box-sizing: border-box;
-        border: 1px solid #cccccc; /* Более мягкая граница */
-        border-radius: 5px;
-      }
+    .modal-header {
+      color: #0e4bf1be;
+      margin-bottom: 20px;
+    }
 
-      .custom-form button {
-        background-color: #333333; /* Темно-серый цвет для кнопки */
-        color: #ffffff; /* Белый текст */
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
-    <!----======== CSS ======== -->
+    button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .delete-button {
+      background-color: #ff3333;
+      /* Красный цвет для кнопки удаления */
+      color: #ffffff;
+      /* Белый текст */
+    }
+
+    .edit-button {
+      background-color: #3385ff;
+      /* Синий цвет для кнопки изменения */
+      color: #ffffff;
+      /* Белый текст */
+    }
+
+    .add-button {
+      background-color: #00cc00;
+      color: #ffffff;
+   
+    }
+
+    .custom-form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .custom-form label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .custom-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+    }
+
+    .custom-form button {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+
     <link rel="stylesheet" href="../css/style.css" />
 
-    <!----===== Iconscout CSS ===== -->
     <link
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
@@ -319,67 +327,7 @@
 
       <div class="menu-items">
         <ul class="nav-links">
-          <li>
-            <a href="./schedule.html">
-              <i class="uil uil-schedule"></i>
-              <span class="link-name">Расписание</span>
-            </a>
-          </li>
-          <li>
-            <a href="./diary.html">
-              <i class="uil uil-book-open"></i>
-              <span class="link-name">Электронный дневник</span>
-            </a>
-          </li>
-          <li class="active-menu-link">
-            <a href="./teachers.html">
-              <i class="uil uil-user-square"></i>
-              <span class="link-name">Преподаватели</span>
-            </a>
-          </li>
-          <li>
-            <a href="./admins.html">
-              <i class="uil uil-user-plus"></i>
-              <span class="link-name">Админы</span>
-            </a>
-          </li>
-          <li>
-            <a href="./students.html">
-              <i class="uil uil-book-reader"></i>
-              <span class="link-name">Обучающиеся</span>
-            </a>
-          </li>
-          <li>
-            <a href="./news.html">
-              <i class="uil uil-newspaper"></i>
-              <span class="link-name">Новости</span>
-            </a>
-          </li>
-          <li>
-            <a href="./messages.html">
-              <i class="uil uil-comments"></i>
-              <span class="link-name">Сообщения</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <button
-                class="trigger"
-                data-modal-trigger="trigger-1"
-                style="
-                  background: transparent;
-                  padding: 0;
-                  margin: 0;
-                  border: 0;
-                  width: 100%;
-                  display: flex;
-                "
-              >
-                <i class="uil uil-user"></i>
-                <span class="link-name">Аккаунт</span>
-              </button>
-            </a>
-          </li>
+          
         </ul>
 
         <ul class="logout-mode">
@@ -433,9 +381,7 @@
       </div>
       <div class="dash-content">
         <div class="overview">
-          <button class="add-button trigger" data-modal-trigger="trigger-2">
-            Добавить
-          </button>
+          
           <div class="modal modal-blue" data-modal="trigger-2">
             <article class="content-wrapper" style="background-color: #4285f4">
               <button class="close"></button>
@@ -482,7 +428,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th width="230">Функции</th>
+                <th width="230"><button class="add-button trigger" data-modal-trigger="trigger-2">
+                  Добавить
+                </button></th>
               </tr>
             </table>
           </div>
@@ -521,7 +469,12 @@
 
       <div class="row">&copy; 2023 Музыкальная школа. Все права защищены.</div>
     </div>
-
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="../script/roles.js"></script>
     <script>
       // Замените URL_API на фактический URL вашего API
       const apiUrl = "http://127.0.0.1:3000/api/leader/getTeacher";
