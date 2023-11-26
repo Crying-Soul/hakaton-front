@@ -65,6 +65,9 @@ $(document).ready(function () {
           let role = data.role.toLowerCase();
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", role);
+          if (role == "parent") {
+              localStorage.setItem('students', JSON.stringify(data.students));
+          }
           location.href = `pages/${role}-lk.html`;
         },
         function (errorResponse) {

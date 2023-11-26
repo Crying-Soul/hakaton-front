@@ -259,105 +259,7 @@
                     <i class="uil uil-tachometer-fast-alt"></i>
                     <span class="text">Электронный дневник</span>
                 </div>
-                <div class="container">
-                    <div class="card">
-                        <div class="card__header">
-                            <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
-                                class="card__image" width="600">
-                        </div>
-                        <div class="card__body">
-                            <span class="tag tag-blue">Математика</span>
-                            <h4>Алгебра</h4>
-                            <div class="grades-container">
-                                <div class="grade-item">
-                                    <span class="date">01.01.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">05.02.2023</span>
-                                    <span class="grade">4</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">10.03.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-                                <!-- Добавьте свои оценки по аналогии -->
-                            </div>
-                        </div>
-                        <div class="card__footer">
-                            <div class="user">
-                                <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
-                                <div class="user__info">
-                                    <h5>Марк Маркович</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card__header">
-                            <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
-                                class="card__image" width="600">
-                        </div>
-                        <div class="card__body">
-                            <span class="tag tag-brown">Искусство</span>
-                            <h4>Литература</h4>
-                            <div class="grades-container">
-                                <div class="grade-item">
-                                    <span class="date">01.01.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">05.02.2023</span>
-                                    <span class="grade">4</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">10.03.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card__footer">
-                            <div class="user">
-                                <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
-                                <div class="user__info">
-                                    <h5>Галина Ивановна</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card__header">
-                            <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
-                                class="card__image" width="600">
-                        </div>
-                        <div class="card__body">
-                            <span class="tag tag-red">Математика</span>
-                            <h4>Геометрия</h4>
-                            <div class="grades-container">
-                                <div class="grade-item">
-                                    <span class="date">01.01.2023</span>
-                                    <span class="grade">3</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">05.02.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-                                <div class="grade-item">
-                                    <span class="date">10.03.2023</span>
-                                    <span class="grade">5</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card__footer">
-                            <div class="user">
-                                <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
-                                <div class="user__info">
-                                    <h5>Марья Петровна</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container" id="container">
 
                 </div>
             </div>
@@ -399,6 +301,43 @@
   ></script>
   <script src="../script/roles.js"></script>
     <script>
+         const subjects = [
+            { tagClass: "tag tag-blue", subject: "Математика", title: "Алгебра" },
+            { tagClass: "tag tag-brown", subject: "Искусство", title: "Литература" },
+            { tagClass: "tag tag-red", subject: "Математика", title: "Геометрия" }
+        ];
+
+        const userNames = ["Марк Маркович", "Галина Ивановна", "Марья Петровна"];
+
+        function generateCard(subjectInfo, userName) {
+            const container = document.getElementById("container");
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                <div class="card__header"><img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600"></div>
+                <div class="card__body">
+                    <span class="${subjectInfo.tagClass}">${subjectInfo.subject}</span>
+                    <h4>${subjectInfo.title}</h4>
+                    <div class="grades-container">${Array.from({ length: 3 }, () => `
+                        <div class="grade-item">
+                            <span class="date">01.01.2023</span>
+                            <span class="grade">${Math.floor(Math.random() * 3) + 3}</span>
+                        </div>`).join('')}
+                    </div>
+                </div>
+                <div class="card__footer">
+                    <div class="user">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
+                        <div class="user__info">
+                            <h5>${userName}</h5>
+                        </div>
+                    </div>
+                </div>`;
+            container.appendChild(card);
+        }
+
+        subjects.forEach(subjectInfo => generateCard(subjectInfo, userNames[Math.floor(Math.random() * userNames.length)]));
+   
 
         const body = document.querySelector("body"),
             modeToggle = body.querySelector(".mode-toggle");

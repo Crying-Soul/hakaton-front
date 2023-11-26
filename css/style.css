@@ -918,10 +918,10 @@ body.dark .footer {
 .trigger:hover {
   cursor: pointer;
 }
-.logo-name:hover >*{
+.logo-name:hover > * {
   cursor: pointer;
   font-size: 23px !important;
-  transition: all ease .5s;
+  transition: all ease 0.5s;
 }
 .modal {
   position: fixed;
@@ -948,13 +948,232 @@ body.dark .footer {
 .modal.open > .content-wrapper {
   transform: scale(1);
 }
-body.dark .modal .content-wrapper{
+body.dark .modal .content-wrapper {
   background-color: var(--primary-color);
   color: #707070;
 }
-body.dark .modal h2{
- 
+body.dark .modal h2 {
   color: var(--text-color);
+}
+.band {
+  width: 90%;
+  max-width: 1500px;
+  margin: 10% auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media (min-width: 30em) {
+  .band {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 60em) {
+  .band {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+body.dark .card,
+body.dark .band h1 {
+  background: #3a3b3c;
+  color: #ccc;
+}
+
+.card {
+  background: white;
+  text-decoration: none;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+  top: 0;
+  transition: all 0.1s ease-in;
+}
+
+.card:hover {
+  top: -2px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card article {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card h1 {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
+}
+
+.card p {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.card span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 2em 0 0 0;
+}
+
+.card .thumb {
+  padding-bottom: 60%;
+  background-size: cover;
+  background-position: center center;
+}
+
+@media (min-width: 60em) {
+  .item-1 {
+    grid-column: 1 / span 2;
+  }
+
+  .item-1 h1 {
+    font-size: 24px;
+  }
+}
+
+.pdfobject-container {
+  height: 30rem;
+  border: 1rem solid rgba(0, 0, 0, 0.1);
+}
+
+.account-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.account-list li {
+  margin-bottom: 10px;
+}
+
+.account-list span {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #4285f4;
+}
+
+.modal-header {
+  color: #0e4bf1be;
+  margin-bottom: 20px;
+}
+
+.add-news-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #3498db;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.add-news-button:hover {
+  background-color: #2980b9;
+}
+
+.news-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  /* синий цвет фона формы */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+  max-width: 340px;
+  max-height: 340px;
+  min-width: 150px;
+  min-height: 150px;
+}
+
+.news-form label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.news-form input,
+.news-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ffffff;
+  /* белая обводка */
+  border-radius: 5px;
+  background-color: #ecf0f1;
+  /* светло-серый цвет фона */
+  color: #333333;
+  /* цвет текста в полях ввода */
+}
+
+.news-form input:focus,
+.news-form textarea:focus {
+  outline: none;
+  border-color: #2980b9;
+  /* измененный цвет при активации поля */
+}
+
+.news-form .file-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ffffff;
+  /* белая обводка */
+  border-radius: 5px;
+  background-color: #ecf0f1;
+  /* светло-серый цвет фона */
+  color: #333333;
+  /* цвет текста */
+}
+
+.news-form .file-input:focus {
+  outline: none;
+  border-color: #2980b9;
+  /* измененный цвет при активации поля */
+}
+
+.news-form .submit-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #ffffff;
+  /* белый цвет кнопки */
+  color: #3498db;
+  /* синий цвет текста кнопки */
+  border: 1px solid #3498db;
+  /* синяя обводка */
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.news-form .submit-button:hover {
+  background-color: #3498db;
+
+  color: #ffffff;
 }
 .modal .content-wrapper {
   position: relative;

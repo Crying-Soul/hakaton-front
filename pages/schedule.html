@@ -33,6 +33,68 @@
             color: #0e4bf1be;
             margin-bottom: 20px;
         }
+
+        h2 {
+            color: #007bff;
+            /* синий цвет */
+        }
+
+        .schedule {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .day {
+            background-color: #3498db;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .lesson {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .teacher,
+        .classroom {
+            font-size: 16px;
+        }
+
+        @media screen and (min-width: 600px) {
+            .schedule {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .schedule {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .schedule {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
     </style>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -83,7 +145,7 @@
             </header>
             <div class="content">
                 <ul class="account-list">
-         
+
 
                 </ul>
             </div>
@@ -103,82 +165,18 @@
 
         <div class="dash-content">
             <div class="overview">
-                <div class="title">
+                <!-- <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
                     <span class="text"></span>
-                </div>
-
-
-                <canvas id="line-chart" width="900" height="450"></canvas>
-
+                </div> -->
+                <form>
+                    <label for="childSelect">Выберите фрукт:</label>
+                    <select id="childSelect"></select>
+                </form>
+                <div class="schedule"></div>
             </div>
 
-            <div class="activity">
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Последние новости</span>
-                </div>
-                <ul class="cards">
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--fence"></div>
-                            <div class="card__content">
-                                <div class="card__title">Ученики нашей школы — победители регионального конкурса!</div>
-                                <p class="card__text">Вчера наши студенты впечатлили жюри и зрителей на ежегодном
-                                    региональном музыкальном конкурсе. Среди победителей - наши талантливые ученики,
-                                    обладатели первых мест в различных категориях. Этот успех подчеркивает высокий
-                                    уровень профессионализма наших преподавателей и творческий потенциал наших учеников.
-                                </p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--river"></div>
-                            <div class="card__content">
-                                <div class="card__title">Мастер-класс от известного композитора для студентов</div>
-                                <p class="card__text">Завтра в нашей школе состоится мастер-класс от известного
-                                    композитора Ивана Сергеева. Это уникальная возможность для наших студентов узнать
-                                    больше о процессе создания музыки, получить ценные советы и задать вопросы лично. Мы
-                                    уверены, что это событие станет важным этапом в творческом развитии наших учеников.
-                                </p>
-                                <button class="btn btn--block card__btn">Прочитать полностью </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--record"></div>
-                            <div class="card__content">
-                                <div class="card__title">Современные технологии в обучении музыке: обновления программы
-                                </div>
-                                <p class="card__text">Мы рады объявить об обновлении нашей программы обучения! Теперь мы
-                                    внедряем современные технологии, чтобы сделать учебу более увлекательной и
-                                    эффективной. Виртуальные инструменты, интерактивные уроки и онлайн-ресурсы станут
-                                    неотъемлемой частью учебного процесса. Это открывает новые горизонты для наших
-                                    студентов!</p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--flowers"></div>
-                            <div class="card__content">
-                                <div class="card__title">Концертный вечер талантов: незабываемые впечатления от
-                                    учеников"</div>
-                                <p class="card__text">Вчера вечером наша музыкальная школа устроила концертный вечер, на
-                                    котором наши ученики представили свои музыкальные произведения. Зрители остались в
-                                    восторге от таланта и профессионализма наших молодых музыкантов. Это был вечер,
-                                    наполненный невероятной энергией и красивой музыкой, который запомнится нам на
-                                    долгое время.</p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div class="band"></div>
     </section>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -215,6 +213,176 @@
     <script src="../script/roles.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
+async function fetchData() {
+            try {
+                const token = localStorage.getItem('token');
+                const apiUrl = 'http://localhost:3000/api/news';
+
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                prependCards(data);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        }
+
+        // Функция для создания карточки новости
+        function createCard(item) {
+            const card = document.createElement("div");
+            card.className = "item";
+
+            const link = document.createElement("a");
+            link.href = "#";
+            link.className = "card";
+
+            const thumb = document.createElement("div");
+            thumb.className = "thumb";
+            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg'}')`;
+
+            const article = document.createElement("article");
+
+            const elements = [
+                { tag: "h1", content: item.title },
+                { tag: "p", content: item.text },
+                { tag: "span", content: item.date }
+            ];
+
+            elements.forEach(({ tag, content }) => {
+                const element = document.createElement(tag);
+                element.textContent = content;
+                article.appendChild(element);
+            });
+
+            link.appendChild(thumb);
+            link.appendChild(article);
+            card.appendChild(link);
+
+            return card;
+        }
+
+        // Функция для добавления карточек в начало списка
+        function prependCards(data) {
+            const band = document.querySelector(".band");
+            data.reverse().forEach(item => {
+                const card = createCard(item);
+                band.insertBefore(card, band.firstChild);
+            });
+        }
+
+       
+
+        // Загрузка новостей при загрузке страницы
+        fetchData();
+        var select = document.getElementById("childSelect");
+
+        let students = JSON.parse(localStorage.getItem('students'));
+        students.forEach(element => {
+            var option = document.createElement("option");
+            option.value = element.id;
+            option.text = element.name;
+            select.appendChild(option);
+        });
+
+        const headers = {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        };
+
+
+        const requestBody = JSON.stringify({
+            studentId: select.value,
+
+        });
+        fetch('http://localhost:3000/api/lesson/getStudentLesson', {
+            method: 'POST',
+            headers: headers,
+            body: requestBody,
+        })
+            .then(response => {
+                // Обработка ответа
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(apiData => {
+                // Обработка данных
+                // console.log('Response data:', data);
+                // const apiData = {
+                //     "lessons": [
+                //         {
+                //             "day": 25,
+                //             "lessons": [
+                //                 {
+                //                     "time": "12:00",
+                //                     "subject": "math",
+                //                     "teacher": "6562af3f936a601046da7e5e",
+                //                     "cabinet": "633"
+                //                 }
+                //             ]
+                //         }
+                //     ]
+                // };
+
+                // Функция для форматирования времени
+                function formatTime(time) {
+                    return `${time.slice(0, 5)} - ${time.slice(0, 2) < 12 ? 'AM' : 'PM'}`;
+                }
+
+                // Функция для создания HTML-блока урока
+                function createLessonBlock(lesson) {
+                    return `
+    <div class="lesson">
+      <p class="time">${formatTime(lesson.time)}</p>
+      <p class="teacher">${lesson.teacher}</p>
+      <p class="subject">Предмет: ${lesson.subject}</p>
+      <p class="classroom">Аудитория ${lesson.cabinet}</p>
+    </div>
+  `;
+                }
+
+                // Функция для создания HTML-блока дня
+                function createDayBlock(day) {
+                    const lessonsHtml = day.lessons.map(createLessonBlock).join('');
+                    return `
+    <div class="day">
+      <h2>${day.day}</h2>
+      ${lessonsHtml}
+    </div>
+  `;
+                }
+
+                // Функция для обновления расписания на странице
+                function updateSchedule(data) {
+                    const scheduleContainer = document.querySelector('.schedule');
+
+                    // Проверка на наличие уроков
+                    if (data.lessons.length === 0) {
+                        scheduleContainer.innerHTML = '<p>Уроков нет</p>';
+                        return;
+                    }
+
+                    const scheduleHtml = data.lessons.map(createDayBlock).join('');
+                    scheduleContainer.innerHTML = scheduleHtml;
+                }
+
+                // Вызов функции для обновления расписания
+                updateSchedule(apiData);
+            })
+            .catch(error => {
+                // Обработка ошибок
+                console.error('Fetch error:', error);
+            });
+
 
         const body = document.querySelector("body"),
             modeToggle = body.querySelector(".mode-toggle");

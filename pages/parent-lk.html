@@ -113,71 +113,8 @@
 
             </div>
 
-            <div class="activity">
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Последние новости</span>
-                </div>
-                <ul class="cards">
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--fence"></div>
-                            <div class="card__content">
-                                <div class="card__title">Ученики нашей школы — победители регионального конкурса!</div>
-                                <p class="card__text">Вчера наши студенты впечатлили жюри и зрителей на ежегодном
-                                    региональном музыкальном конкурсе. Среди победителей - наши талантливые ученики,
-                                    обладатели первых мест в различных категориях. Этот успех подчеркивает высокий
-                                    уровень профессионализма наших преподавателей и творческий потенциал наших учеников.
-                                </p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--river"></div>
-                            <div class="card__content">
-                                <div class="card__title">Мастер-класс от известного композитора для студентов</div>
-                                <p class="card__text">Завтра в нашей школе состоится мастер-класс от известного
-                                    композитора Ивана Сергеева. Это уникальная возможность для наших студентов узнать
-                                    больше о процессе создания музыки, получить ценные советы и задать вопросы лично. Мы
-                                    уверены, что это событие станет важным этапом в творческом развитии наших учеников.
-                                </p>
-                                <button class="btn btn--block card__btn">Прочитать полностью </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--record"></div>
-                            <div class="card__content">
-                                <div class="card__title">Современные технологии в обучении музыке: обновления программы
-                                </div>
-                                <p class="card__text">Мы рады объявить об обновлении нашей программы обучения! Теперь мы
-                                    внедряем современные технологии, чтобы сделать учебу более увлекательной и
-                                    эффективной. Виртуальные инструменты, интерактивные уроки и онлайн-ресурсы станут
-                                    неотъемлемой частью учебного процесса. Это открывает новые горизонты для наших
-                                    студентов!</p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cards__item">
-                        <div class="card">
-                            <div class="card__image card__image--flowers"></div>
-                            <div class="card__content">
-                                <div class="card__title">Концертный вечер талантов: незабываемые впечатления от
-                                    учеников"</div>
-                                <p class="card__text">Вчера вечером наша музыкальная школа устроила концертный вечер, на
-                                    котором наши ученики представили свои музыкальные произведения. Зрители остались в
-                                    восторге от таланта и профессионализма наших молодых музыкантов. Это был вечер,
-                                    наполненный невероятной энергией и красивой музыкой, который запомнится нам на
-                                    долгое время.</p>
-                                <button class="btn btn--block card__btn">Прочитать полностью</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+            <div class="band">
+
             </div>
     </section>
 
@@ -219,6 +156,76 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
+        async function fetchData() {
+            try {
+                const token = localStorage.getItem('token');
+                const apiUrl = 'http://localhost:3000/api/news';
+
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                prependCards(data);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        }
+
+        // Функция для создания карточки новости
+        function createCard(item) {
+            const card = document.createElement("div");
+            card.className = "item";
+
+            const link = document.createElement("a");
+            link.href = "#";
+            link.className = "card";
+
+            const thumb = document.createElement("div");
+            thumb.className = "thumb";
+            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg'}')`;
+
+            const article = document.createElement("article");
+
+            const elements = [
+                { tag: "h1", content: item.title },
+                { tag: "p", content: item.text },
+                { tag: "span", content: item.date }
+            ];
+
+            elements.forEach(({ tag, content }) => {
+                const element = document.createElement(tag);
+                element.textContent = content;
+                article.appendChild(element);
+            });
+
+            link.appendChild(thumb);
+            link.appendChild(article);
+            card.appendChild(link);
+
+            return card;
+        }
+
+   
+        function prependCards(data) {
+            const band = document.querySelector(".band");
+            data.reverse().forEach(item => {
+                const card = createCard(item);
+                band.insertBefore(card, band.firstChild);
+            });
+        }
+
+       
+
+        // Загрузка новостей при загрузке страницы
+        fetchData();
+
 
         const body = document.querySelector("body"),
             modeToggle = body.querySelector(".mode-toggle");
