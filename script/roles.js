@@ -117,14 +117,47 @@ if (current_role == "teacher") {
 </a>
 </li>
   `);
+} else if (current_role == "admin") {
+  $("ul.nav-links").html(`<li><a href="./teachers.html">
+  <i class="uil uil-user-square"></i>
+  <span class="link-name">Преподаватели</span>
+</a></li>
+<li><a href="./parents.html">
+<i class="uil uil-house-user"></i>
+  <span class="link-name">Родители</span>
+</a></li>
+<li><a href="./students.html">
+  <i class="uil uil-book-reader"></i>
+  <span class="link-name">Обучающиеся</span>
+</a></li>
+<li><a href="./news.html">
+  <i class="uil uil-newspaper"></i>
+  <span class="link-name">Новости</span>
+</a></li>
+<li><a href="./messages.html">
+  <i class="uil uil-comments"></i>
+  <span class="link-name">Сообщения</span>
+</a></li>
+<li><a href="#">
+  <button class="trigger" data-modal-trigger="trigger-1"
+      style="background: transparent; padding: 0; margin: 0; border: 0; width: 100%; display: flex;">
+      <i class="uil uil-user"></i>
+      <span class="link-name">Аккаунт</span>
+  </button>
+</a>
+</li>
+  `);
 }
+
+const org = localStorage.getItem('organization');
+const title = document.querySelector('.logo_name');
+
+title.textContent = org;
 
 const logo = document.querySelector(".logo-name");
 logo.addEventListener("click", (e) => {
   location.href = `${localStorage.getItem("role")}-lk.html`;
 });
-
-
 
 var requestOptions = {
   method: "GET",
@@ -143,7 +176,6 @@ fetch("http://127.0.0.1:3000/api/getInfo", requestOptions)
     return response.json();
   })
   .then((apiData) => {
-   
     function addListItem(label, value) {
       var li = document.createElement("li");
       li.innerHTML = `<span>${label}:</span> ${value}`;

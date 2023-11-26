@@ -17,6 +17,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.dark p,
+body.dark h1,
+body.dark h2,
+body.dark span,
+body.dark th,
+body.dark button,
+body.dark li{
+  color: white !important;
+}
+
 .active-menu-link * {
   color: #0b3cc1 !important;
 }

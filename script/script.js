@@ -65,6 +65,7 @@ $(document).ready(function () {
           let role = data.role.toLowerCase();
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", role);
+          localStorage.setItem('organization', data.organization);
           if (role == "parent") {
               localStorage.setItem('students', JSON.stringify(data.students));
           }
@@ -93,6 +94,7 @@ $(document).ready(function () {
           localStorage.setItem("password", data.password);
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", 'leader');
+          localStorage.setItem('organization', data.organization);
           location.href = "pages/leader-lk.html";
         },
         function (errorResponse) {
