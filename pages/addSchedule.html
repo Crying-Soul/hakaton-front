@@ -12,32 +12,28 @@
             window.location.href = "../index.html";
         }
     </script>
-
     <style>
-        .account-list {
-            list-style-type: none;
-            padding: 0;
+        html {
+            background: #f5f7f8;
+            font-family: system-ui;
+            -webkit-font-smoothing: antialiased;
+            padding: 20px 0;
         }
 
-        .account-list li {
-            margin-bottom: 10px;
+        header {
+            width: 90%;
+            max-width: 1240px;
+            margin: 0 auto;
         }
 
-        .account-list span {
-            font-weight: bold;
-            margin-right: 5px;
-            color: #4285f4;
-        }
-
-        .modal-header {
-            color: #0e4bf1be;
-            margin-bottom: 20px;
-        }
+    
     </style>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  
+    
 
-    <title>Admin Dashboard Panel</title>
+    <title>News</title>
 </head>
 
 <body style="overflow-x: hidden;">
@@ -52,7 +48,6 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-
             </ul>
 
             <ul class="logout-mode">
@@ -100,24 +95,47 @@
             </div>
 
         </div>
+        <div class="modal modal-blue" data-modal="trigger-2">
+            <article class="content-wrapper" style="background-color: #4285f4">
+                <button class="close"></button>
+                <header class="modal-header">
+                    <h2 style="color: white">Добавить новость</h2>
+                </header>
+                <div class="content">
+                    <form class="news-form">
+                        <label for="title">Заголовок новости:</label>
+                        <input type="text" placeholder="Заголовок" id="title" name="title" required>
 
+                        <label for="content">Содержание новости:</label>
+                        <textarea id="content" placeholder="Расскажите о..." name="content" rows="4"
+                            required></textarea>
+                        <label for="file" style="margin-top: 10px;">Выберите файл:</label>
+                        <input type="file" id="file" name="file" class="file-input">
+
+                        <input style="margin: 10px 0;" type="submit" value="Опубликовать" class="submit-button">
+                    </form>
+                </div>
+            </article>
+        </div>
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
                     <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Успеваемость</span>
+                    <span class="text">Новости</span>
                 </div>
-
-
-                <canvas id="line-chart" width="900" height="450"></canvas>
-
+                <button class="trigger add-news-button" data-modal-trigger="trigger-2" style="margin: 0.5%;">Добавить
+                    новость</button>
                 <div class="band">
 
                 </div>
+
             </div>
+        </div>
+
+
     </section>
 
-    
+
 
     <div class="footer">
         <div class="row">
@@ -145,78 +163,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../script/roles.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
-        async function fetchData() {
-            try {
-                const token = localStorage.getItem('token');
-                const apiUrl = 'http://localhost:3000/api/news';
-
-                const response = await fetch(apiUrl, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                prependCards(data);
-            } catch (error) {
-                console.error('Error fetching data:', error.message);
-            }
-        }
-
-        // Функция для создания карточки новости
-        function createCard(item) {
-            const card = document.createElement("div");
-            card.className = "item";
-
-            const link = document.createElement("a");
-            link.href = "#";
-            link.className = "card";
-
-            const thumb = document.createElement("div");
-            thumb.className = "thumb";
-            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://source.unsplash.com/random/200x200?sig=1'}')`;
-
-            const article = document.createElement("article");
-
-            const elements = [
-                { tag: "h1", content: item.title },
-                { tag: "p", content: item.text },
-                { tag: "span", content: item.date }
-            ];
-
-            elements.forEach(({ tag, content }) => {
-                const element = document.createElement(tag);
-                element.textContent = content;
-                article.appendChild(element);
-            });
-
-            link.appendChild(thumb);
-            link.appendChild(article);
-            card.appendChild(link);
-
-            return card;
-        }
-
-      
-        function prependCards(data) {
-            const band = document.querySelector(".band");
-            data.reverse().forEach(item => {
-                const card = createCard(item);
-                band.insertBefore(card, band.firstChild);
-            });
-        }
-
-
-
-        // Загрузка новостей при загрузке страницы
-        fetchData();
-
+       
         const body = document.querySelector("body"),
             modeToggle = body.querySelector(".mode-toggle");
         sidebar = body.querySelector("nav");
@@ -247,45 +195,6 @@
                 localStorage.setItem("status", "close");
             } else {
                 localStorage.setItem("status", "open");
-            }
-        });
-        new Chart(document.getElementById("line-chart"), {
-            type: 'line',
-            data: {
-                labels: ["Сентябрь", "Октябрь", "Ноябрь", "Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май"],
-                datasets: [{
-                    data: [2.2, 3.0, 3.8, 4.0, 3.2, 4.1, 3.5, 3.7, 4.2, 3.9],
-                    label: "6А",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: [2.7, 4.2, 3.1, 3.9, 4.1, 3.6, 4.0, 3.2, 4.4, 3.8],
-                    label: "6Б",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [4.0, 3.5, 2.9, 4.1, 3.3, 4.0, 3.5, 2.9, 4.3, 3.7],
-                    label: "6В",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [4.2, 4.3, 4.0, 4.1, 4.5, 4.6, 4.8, 4.0, 4.3, 3.7],
-                    label: "6Г",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [2.5, 3.8, 4.1, 3.2, 4.0, 3.5, 4.2, 3.0, 4.2, 4.4],
-                    label: "6Д",
-                    borderColor: "#c45850",
-                    fill: false
-                }
-                ]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Успеваемость среди 6-х классов'
-                }
             }
         });
         const buttons = document.querySelectorAll('.trigger[data-modal-trigger]');

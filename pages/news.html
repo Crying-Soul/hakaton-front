@@ -222,7 +222,6 @@
             }
         }
 
-        // Функция для создания карточки новости
         function createCard(item) {
             const card = document.createElement("div");
             card.className = "item";
@@ -233,7 +232,7 @@
 
             const thumb = document.createElement("div");
             thumb.className = "thumb";
-            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://source.unsplash.com/random/200x200?sig=1"'}')`;
+            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://source.unsplash.com/random/200x200?sig=1'}')`;
 
             const article = document.createElement("article");
 

@@ -122,6 +122,11 @@ if (current_role == "teacher") {
   <i class="uil uil-user-square"></i>
   <span class="link-name">Преподаватели</span>
 </a></li>
+<li><a href="./addSchedule.html">
+  <i class="uil uil-user-square"></i>
+  <span class="link-name">Добавить расписание</span>
+</a></li>
+
 <li><a href="./parents.html">
 <i class="uil uil-house-user"></i>
   <span class="link-name">Родители</span>

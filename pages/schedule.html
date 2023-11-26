@@ -165,10 +165,6 @@
 
         <div class="dash-content">
             <div class="overview">
-                <!-- <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text"></span>
-                </div> -->
                 <form>
                     <label for="childSelect">Выберите студента:</label>
                     <select id="childSelect"></select>
@@ -178,9 +174,6 @@
 
             <div class="band"></div>
     </section>
-
-    
-    
 
     <div class="footer">
         <div class="row">
@@ -243,7 +236,7 @@ async function fetchData() {
 
             const thumb = document.createElement("div");
             thumb.className = "thumb";
-            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg'}')`;
+            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://source.unsplash.com/random/200x200?sig=1'}')`;
 
             const article = document.createElement("article");
 
@@ -312,34 +305,13 @@ async function fetchData() {
                 return response.json();
             })
             .then(apiData => {
-                // Обработка данных
-                // console.log('Response data:', data);
-                // const apiData = {
-                //     "lessons": [
-                //         {
-                //             "day": 25,
-                //             "lessons": [
-                //                 {
-                //                     "time": "12:00",
-                //                     "subject": "math",
-                //                     "teacher": "6562af3f936a601046da7e5e",
-                //                     "cabinet": "633"
-                //                 }
-                //             ]
-                //         }
-                //     ]
-                // };
-
-                // Функция для форматирования времени
-                function formatTime(time) {
-                    return `${time.slice(0, 5)} - ${time.slice(0, 2) < 12 ? 'AM' : 'PM'}`;
-                }
+              
 
                 // Функция для создания HTML-блока урока
                 function createLessonBlock(lesson) {
                     return `
     <div class="lesson">
-      <p class="time">${formatTime(lesson.time)}</p>
+      <p class="time">${lesson.time}</p>
       <p class="teacher">${lesson.teacher}</p>
       <p class="subject">Предмет: ${lesson.subject}</p>
       <p class="classroom">Аудитория ${lesson.cabinet}</p>
