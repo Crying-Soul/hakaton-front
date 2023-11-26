@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "../index.html";
+        }
+    </script>
+    
+    <style>
+      
+        .account-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .account-list li {
+            margin-bottom: 10px;
+        }
+
+        .account-list span {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #4285f4;
+        }
+
+        .modal-header {
+            color: #0e4bf1be;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Leader Dashboard Panel</title>
+</head>
+
+<body style="overflow-x: hidden;">
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="../images/logo.jpg" alt="">
+            </div>
+
+            <span class="logo_name">Your school name</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="#" onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Выйти</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Ночной режим</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="modal" data-modal="trigger-1">
+        <article class="content-wrapper">
+            <button class="close"></button>
+            <header class="modal-header">
+                <h2>Информация об аккаунте</h2>
+            </header>
+            <div class="content">
+                <ul class="account-list">
+        
+
+                </ul>
+            </div>
+
+        </article>
+    </div>
+    <section class="dashboard">
+        <div class="top">
+
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Поиск по сайту...">
+            </div>
+
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Успеваемость</span>
+                </div>
+
+
+                <canvas id="line-chart" width="900" height="450"></canvas>
+
+            </div>
+
+            <div class="band">
+
+            </div>
+    </section>
+
+    
+    
+
+    <div class="footer">
+        <div class="row">
+            <a href="#"><i class="uil uil-facebook"></i></a>
+            <a href="#"><i class="uil uil-instagram"></i></a>
+            <a href="#"><i class="uil uil-youtube"></i></a>
+            <a href="#"><i class="uil uil-twitter"></i></a>
+        </div>
+
+        <div class="row">
+            <ul>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Career</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            &copy; 2023 Музыкальная школа. Все права защищены.
+        </div>
+    </div>
+    </footer>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="../script/roles.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        async function fetchData() {
+            try {
+                const token = localStorage.getItem('token');
+                const apiUrl = 'http://localhost:3000/api/news';
+
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                prependCards(data);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        }
+
+        // Функция для создания карточки новости
+        function createCard(item) {
+            const card = document.createElement("div");
+            card.className = "item";
+
+            const link = document.createElement("a");
+            link.href = "#";
+            link.className = "card";
+
+            const thumb = document.createElement("div");
+            thumb.className = "thumb";
+            thumb.style.backgroundImage = `url('${item.imageUrl || 'https://source.unsplash.com/random/200x200?sig=1'}')`;
+
+            const article = document.createElement("article");
+
+            const elements = [
+                { tag: "h1", content: item.title },
+                { tag: "p", content: item.text },
+                { tag: "span", content: item.date }
+            ];
+
+            elements.forEach(({ tag, content }) => {
+                const element = document.createElement(tag);
+                element.textContent = content;
+                article.appendChild(element);
+            });
+
+            link.appendChild(thumb);
+            link.appendChild(article);
+            card.appendChild(link);
+
+            return card;
+        }
+
+   
+        function prependCards(data) {
+            const band = document.querySelector(".band");
+            data.reverse().forEach(item => {
+                const card = createCard(item);
+                band.insertBefore(card, band.firstChild);
+            });
+        }
+
+       
+
+        // Загрузка новостей при загрузке страницы
+        fetchData();
+
+
+        const body = document.querySelector("body"),
+            modeToggle = body.querySelector(".mode-toggle");
+        sidebar = body.querySelector("nav");
+        sidebarToggle = body.querySelector(".sidebar-toggle");
+
+        let getMode = localStorage.getItem("mode");
+        if (getMode && getMode === "dark") {
+            body.classList.toggle("dark");
+        }
+
+        let getStatus = localStorage.getItem("status");
+        if (getStatus && getStatus === "close") {
+            sidebar.classList.toggle("close");
+        }
+
+        modeToggle.addEventListener("click", () => {
+            body.classList.toggle("dark");
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("mode", "dark");
+            } else {
+                localStorage.setItem("mode", "light");
+            }
+        });
+
+        sidebarToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            if (sidebar.classList.contains("close")) {
+                localStorage.setItem("status", "close");
+            } else {
+                localStorage.setItem("status", "open");
+            }
+        });
+        new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+                labels: ["Сентябрь", "Октябрь", "Ноябрь", "Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май"],
+                datasets: [{
+                    data: [2.8, 3.0, 3.8, 4.0, 3.2, 4.1, 3.5, 3.7, 4.2, 3.9],
+                    label: "Вася",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Твоя успеваемость'
+                }
+            }
+        });
+        const buttons = document.querySelectorAll('.trigger[data-modal-trigger]');
+
+        for (let button of buttons) {
+            modalEvent(button);
+        }
+
+        function modalEvent(button) {
+            button.addEventListener('click', () => {
+                const trigger = button.getAttribute('data-modal-trigger');
+                // console.log('trigger', trigger)
+                const modal = document.querySelector(`[data-modal=${trigger}]`);
+                console.log('modal', modal)
+                const contentWrapper = modal.querySelector('.content-wrapper');
+                const close = modal.querySelector('.close');
+
+                close.addEventListener('click', () => modal.classList.remove('open'));
+                modal.addEventListener('click', () => modal.classList.remove('open'));
+                contentWrapper.addEventListener('click', (e) => e.stopPropagation());
+
+                modal.classList.toggle('open');
+            });
+        }
+    </script>
+
+</body>
+
+</html>

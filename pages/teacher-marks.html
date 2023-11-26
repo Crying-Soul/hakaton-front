@@ -215,20 +215,14 @@
                 <th>Day</th>
                 <th>Time</th>
                 <th>Subject</th>
-                <th>Teacher</th>
+           
                 <th>Group</th>
                 <th>Cabinet</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
-          <button
-            class="trigger add-news-button"
-            data-modal-trigger="trigger-2"
-            style="margin: 0.5%"
-          >
-            Добавить урок
-          </button>
+          
           <div class="band"></div>
         </div>
       </div>
@@ -261,10 +255,10 @@
     ></script>
     <script src="../script/roles.js"></script>
     <script>
-      async function fetchData() {
+       async function fetchData() {
         try {
           const response = await fetch(
-            "http://localhost:3000/api/lesson/getAllLesson",
+            "http://localhost:3000/api/lesson/getTeacherLesson",
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -288,81 +282,15 @@
             row.insertCell(0).textContent = day.day;
             row.insertCell(1).textContent = lesson.time;
             row.insertCell(2).textContent = lesson.subject;
-            row.insertCell(3).textContent = lesson.teacher;
-            row.insertCell(4).textContent = lesson.group;
-            row.insertCell(5).textContent = lesson.cabinet;
+           
+            row.insertCell(3).textContent = lesson.group;
+            row.insertCell(4).textContent = lesson.cabinet;
           });
         });
       }
 
       // Вызываем функцию для выполнения запроса и отображения данных
       fetchData();
-
-      fetch("http://127.0.0.1:3000/api/leader/getTeacher", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              "Ошибка при получении данных: " + response.statusText
-            );
-          }
-          return response.json();
-        })
-        .then((teachers) => {
-          // Заполнение выпадающего списка преподавателей
-          const teacherSelect = document.getElementById("teacher");
-          teachers.forEach((teacher) => {
-            const option = document.createElement("option");
-            option.value = teacher._id;
-            option.textContent = teacher.name;
-            teacherSelect.appendChild(option);
-          });
-        })
-        .catch((error) => {
-          console.error("Ошибка:", error.message);
-        });
-
-      document.querySelector("#lesson-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append(
-          "Authorization",
-          `Bearer ${localStorage.getItem("token")}`
-        );
-
-        var raw = JSON.stringify({
-          day: e.target[0].value,
-          time: e.target[1].value,
-          teacher: e.target[2].value,
-
-          group: e.target[3].value,
-          //   subject: e.target[4].value,
-          cabinet: e.target[5].value,
-        });
-        // console.log(raw);
-
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
-        fetch("http://127.0.0.1:3000/api/lesson/createLesson", requestOptions)
-          .then((response) => response.text())
-          .then((result) => {
-            console.log(result);
-            // window.location.reload();
-          })
-          .catch((error) => console.log("error", error));
-      });
-
       const body = document.querySelector("body"),
         modeToggle = body.querySelector(".mode-toggle");
       sidebar = body.querySelector("nav");

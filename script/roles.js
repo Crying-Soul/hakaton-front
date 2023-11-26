@@ -2,7 +2,7 @@ const current_role = localStorage.getItem("role");
 console.log(current_role);
 if (current_role == "teacher") {
   $("ul.nav-links").html(`
-   <li><a href="./schedule.html">
+   <li><a href="./teacher-marks.html">
         <i class="uil uil-schedule"></i>
         <span class="link-name">Расписание</span>
     </a></li>           
@@ -90,9 +90,9 @@ if (current_role == "teacher") {
 </a>
 </li>
   `);
-} else if (current_role == "child") {
+} else if (current_role == "student") {
   $("ul.nav-links").html(`
-  <li><a href="./schedule.html">
+  <li><a href="./student-mark.html">
   <i class="uil uil-schedule"></i>
   <span class="link-name">Расписание</span>
 </a></li>

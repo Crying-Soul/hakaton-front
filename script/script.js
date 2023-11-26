@@ -69,6 +69,9 @@ $(document).ready(function () {
           if (role == "parent") {
               localStorage.setItem('students', JSON.stringify(data.students));
           }
+          if (role == "student") {
+            localStorage.setItem('student', JSON.stringify(data.userId));
+        }
           location.href = `pages/${role}-lk.html`;
         },
         function (errorResponse) {

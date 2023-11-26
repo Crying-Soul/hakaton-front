@@ -1,399 +1,441 @@
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-        const token = localStorage.getItem("token");
-        if (!token) {
-            window.location.href = "../index.html";
-        }
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "../index.html";
+      }
     </script>
-    
+
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
 
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin-block: 2rem;
+        gap: 2rem;
+      }
 
+      img {
+        max-width: 100%;
+        display: block;
+        object-fit: cover;
+      }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            margin-block: 2rem;
-            gap: 2rem;
-        }
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: clamp(20rem, calc(20rem + 2vw), 22rem);
+        overflow: hidden;
+        box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+        border-radius: 1em;
+        background: #ece9e6;
+        background: linear-gradient(to right, #ffffff, #ece9e6);
+      }
 
-        img {
-            max-width: 100%;
-            display: block;
-            object-fit: cover;
-        }
+      .card__body {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            width: clamp(20rem, calc(20rem + 2vw), 22rem);
-            overflow: hidden;
-            box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
-            border-radius: 1em;
-            background: #ECE9E6;
-            background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+      .tag {
+        align-self: flex-start;
+        padding: 0.25em 0.75em;
+        border-radius: 1em;
+        font-size: 0.75rem;
+      }
 
-        }
+      .tag + .tag {
+        margin-left: 0.5em;
+      }
 
+      .tag-blue {
+        background: #56ccf2;
+        background: linear-gradient(to bottom, #2f80ed, #56ccf2);
+        color: #fafafa;
+      }
 
+      .tag-brown {
+        background: #d1913c;
+        background: linear-gradient(to bottom, #ffd194, #d1913c);
+        color: #fafafa;
+      }
 
-        .card__body {
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
-        }
+      .tag-red {
+        background: #cb2d3e;
+        background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+        color: #fafafa;
+      }
 
+      .card__body h4 {
+        font-size: 1.5rem;
+        text-transform: capitalize;
+      }
 
-        .tag {
-            align-self: flex-start;
-            padding: .25em .75em;
-            border-radius: 1em;
-            font-size: .75rem;
-        }
+      .card__footer {
+        display: flex;
+        padding: 1rem;
+        margin-top: auto;
+      }
 
-        .tag+.tag {
-            margin-left: .5em;
-        }
+      .user {
+        display: flex;
+        gap: 0.5rem;
+      }
 
-        .tag-blue {
-            background: #56CCF2;
-            background: linear-gradient(to bottom, #2F80ED, #56CCF2);
-            color: #fafafa;
-        }
+      .user__image {
+        border-radius: 50%;
+      }
 
-        .tag-brown {
-            background: #D1913C;
-            background: linear-gradient(to bottom, #FFD194, #D1913C);
-            color: #fafafa;
-        }
+      .user__info > small {
+        color: #666;
+      }
 
-        .tag-red {
-            background: #cb2d3e;
-            background: linear-gradient(to bottom, #ef473a, #cb2d3e);
-            color: #fafafa;
-        }
+      .pdfobject-container {
+        height: 30rem;
+        border: 1rem solid rgba(0, 0, 0, 0.1);
+      }
 
-        .card__body h4 {
-            font-size: 1.5rem;
-            text-transform: capitalize;
-        }
+      .account-list {
+        list-style-type: none;
+        padding: 0;
+      }
 
-        .card__footer {
-            display: flex;
-            padding: 1rem;
-            margin-top: auto;
-        }
+      .account-list li {
+        margin-bottom: 10px;
+      }
 
-        .user {
-            display: flex;
-            gap: .5rem;
-        }
+      .account-list span {
+        font-weight: bold;
+        margin-right: 5px;
+        color: #4285f4;
+      }
 
-        .user__image {
-            border-radius: 50%;
-        }
+      .modal-header {
+        color: #0e4bf1be;
+        margin-bottom: 20px;
+      }
+      body.dark .grades-container {
+        background-color: #3a3b3c;
+        color: #ccc;
+      }
+      body.dark .card__body,
+      body.dark .card__footer {
+        background-color: #4d4c4c;
+        color: #ccc;
+      }
 
-        .user__info>small {
-            color: #666;
-        }
+      .grades-container {
+        width: 100%;
 
-        .pdfobject-container {
-            height: 30rem;
-            border: 1rem solid rgba(0, 0, 0, 0.1);
-        }
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
 
-       
+      .grade-item {
+        padding: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .account-list {
-            list-style-type: none;
-            padding: 0;
-        }
+      .grade-item:last-child {
+        border-bottom: none;
+      }
 
-        .account-list li {
-            margin-bottom: 10px;
-        }
+      .date {
+        font-size: 14px;
+        color: #888;
+      }
 
-        .account-list span {
-            font-weight: bold;
-            margin-right: 5px;
-            color: #4285f4;
-        }
-
-        .modal-header {
-            color: #0e4bf1be;
-            margin-bottom: 20px;
-        }
-        body.dark .grades-container{
-            background-color: #3a3b3c;
-            color: #ccc;
-        }
-        body.dark .card__body, body.dark .card__footer {
-            background-color: #4d4c4c;
-            color: #ccc;
-        }
-
-        .grades-container {
-            width: 100%;
-
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .grade-item {
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .grade-item:last-child {
-            border-bottom: none;
-        }
-
-        .date {
-            font-size: 14px;
-            color: #888;
-        }
-
-        .grade {
-            font-size: 18px;
-            font-weight: bold;
-            color: #3498db;
-        }
+      .grade {
+        font-size: 20px !important;
+        font-weight: bold !important;
+        color: #3498db !important;
+      }
     </style>
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
 
     <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
 
     <title>Leader Dashboard Panel</title>
-</head>
+  </head>
 
-<body style="overflow-x: hidden;">
+  <body style="overflow-x: hidden">
     <nav>
-        <div class="logo-name">
-            <div class="logo-image">
-                <img src="../images/logo.jpg" alt="">
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="../images/logo.jpg" alt="" />
+        </div>
+
+        <span class="logo_name">Your school name</span>
+      </div>
+
+      <div class="menu-items">
+        <ul class="nav-links"></ul>
+
+        <ul class="logout-mode">
+          <li>
+            <a
+              href="#"
+              onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();"
+            >
+              <i class="uil uil-signout"></i>
+              <span class="link-name">Выйти</span>
+            </a>
+          </li>
+
+          <li class="mode">
+            <a href="#">
+              <i class="uil uil-moon"></i>
+              <span class="link-name">Ночной режим</span>
+            </a>
+
+            <div class="mode-toggle">
+              <span class="switch"></span>
             </div>
-
-            <span class="logo_name">Your school name</span>
-        </div>
-
-        <div class="menu-items">
-            <ul class="nav-links">
-               
-            </ul>
-
-            <ul class="logout-mode">
-                <li><a href="#" onclick="localStorage.removeItem('token'); localStorage.removeItem('role');window.location.reload();">
-                        <i class="uil uil-signout"></i>
-                        <span class="link-name">Выйти</span>
-                    </a></li>
-
-                <li class="mode">
-                    <a href="#">
-                        <i class="uil uil-moon"></i>
-                        <span class="link-name">Ночной режим</span>
-                    </a>
-
-                    <div class="mode-toggle">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-            </ul>
-        </div>
+          </li>
+        </ul>
+      </div>
     </nav>
     <div class="modal" data-modal="trigger-1">
-        <article class="content-wrapper">
-            <button class="close"></button>
-            <header class="modal-header">
-                <h2>Информация об аккаунте</h2>
-            </header>
-            <div class="content">
-                <ul class="account-list">
-                   
-
-                </ul>
-            </div>
-
-        </article>
+      <article class="content-wrapper">
+        <button class="close"></button>
+        <header class="modal-header">
+          <h2>Информация об аккаунте</h2>
+        </header>
+        <div class="content">
+          <ul class="account-list"></ul>
+        </div>
+      </article>
     </div>
     <section class="dashboard">
-        <div class="top">
-
-            <i class="uil uil-bars sidebar-toggle"></i>
-            <div class="search-box">
-                <i class="uil uil-search"></i>
-                <input type="text" placeholder="Поиск по сайту...">
-            </div>
-
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Поиск по сайту..." />
         </div>
+      </div>
 
-        <div class="dash-content">
-
-            <div class="overview">
-                <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Электронный дневник</span>
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Электронный дневник</span>
+          </div>
+          <div class="container">
+            <div class="card">
+                <div class="card__header">
+                    <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
+                        class="card__image" width="600">
                 </div>
-                <div class="container" id="container">
-
-                </div>
-            </div>
-    </section>
-
-
-    
-
-    <div class="footer">
-        <div class="row">
-            <a href="#"><i class="uil uil-facebook"></i></a>
-            <a href="#"><i class="uil uil-instagram"></i></a>
-            <a href="#"><i class="uil uil-youtube"></i></a>
-            <a href="#"><i class="uil uil-twitter"></i></a>
-        </div>
-
-        <div class="row">
-            <ul>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Our Services</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Career</a></li>
-            </ul>
-        </div>
-
-        <div class="row">
-            &copy; 2023 Музыкальная школа. Все права защищены.
-        </div>
-    </div>
-    </footer>
-
-    <script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="../script/roles.js"></script>
-    <script>
-         const subjects = [
-            { tagClass: "tag tag-blue", subject: "Математика", title: "Алгебра" },
-            { tagClass: "tag tag-brown", subject: "Искусство", title: "Литература" },
-            { tagClass: "tag tag-red", subject: "Математика", title: "Геометрия" }
-        ];
-
-        const userNames = ["Марк Маркович", "Галина Ивановна", "Марья Петровна"];
-
-        function generateCard(subjectInfo, userName) {
-            const container = document.getElementById("container");
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `
-                <div class="card__header"><img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600"></div>
                 <div class="card__body">
-                    <span class="${subjectInfo.tagClass}">${subjectInfo.subject}</span>
-                    <h4>${subjectInfo.title}</h4>
-                    <div class="grades-container">${Array.from({ length: 3 }, () => `
+                    <span class="tag tag-blue">Математика</span>
+                    <h4>Алгебра</h4>
+                    <div class="grades-container">
                         <div class="grade-item">
                             <span class="date">01.01.2023</span>
-                            <span class="grade">${Math.floor(Math.random() * 3) + 3}</span>
-                        </div>`).join('')}
+                            <span class="grade">5</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">05.02.2023</span>
+                            <span class="grade">4</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">10.03.2023</span>
+                            <span class="grade">5</span>
+                        </div>
+                        <!-- Добавьте свои оценки по аналогии -->
                     </div>
                 </div>
                 <div class="card__footer">
                     <div class="user">
                         <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
                         <div class="user__info">
-                            <h5>${userName}</h5>
+                            <h5>Марк Маркович</h5>
                         </div>
                     </div>
-                </div>`;
-            container.appendChild(card);
+                </div>
+            </div>
+            <div class="card">
+                <div class="card__header">
+                    <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
+                        class="card__image" width="600">
+                </div>
+                <div class="card__body">
+                    <span class="tag tag-brown">Искусство</span>
+                    <h4>Литература</h4>
+                    <div class="grades-container">
+                        <div class="grade-item">
+                            <span class="date">01.01.2023</span>
+                            <span class="grade">5</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">05.02.2023</span>
+                            <span class="grade">4</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">10.03.2023</span>
+                            <span class="grade">5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card__footer">
+                    <div class="user">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
+                        <div class="user__info">
+                            <h5>Галина Ивановна</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card__header">
+                    <img src="https://source.unsplash.com/600x400/?computer" alt="card__image"
+                        class="card__image" width="600">
+                </div>
+                <div class="card__body">
+                    <span class="tag tag-red">Математика</span>
+                    <h4>Геометрия</h4>
+                    <div class="grades-container">
+                        <div class="grade-item">
+                            <span class="date">01.01.2023</span>
+                            <span class="grade">3</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">05.02.2023</span>
+                            <span class="grade">5</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="date">10.03.2023</span>
+                            <span class="grade">5</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card__footer">
+                    <div class="user">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="user__image" class="user__image">
+                        <div class="user__info">
+                            <h5>Марья Петровна</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="row">
+        <a href="#"><i class="uil uil-facebook"></i></a>
+        <a href="#"><i class="uil uil-instagram"></i></a>
+        <a href="#"><i class="uil uil-youtube"></i></a>
+        <a href="#"><i class="uil uil-twitter"></i></a>
+      </div>
+
+      <div class="row">
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Our Services</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Career</a></li>
+        </ul>
+      </div>
+
+      <div class="row">&copy; 2023 Музыкальная школа. Все права защищены.</div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../script/roles.js"></script>
+    <script>
+      const body = document.querySelector("body"),
+        modeToggle = body.querySelector(".mode-toggle");
+      sidebar = body.querySelector("nav");
+      sidebarToggle = body.querySelector(".sidebar-toggle");
+
+      let getMode = localStorage.getItem("mode");
+      if (getMode && getMode === "dark") {
+        body.classList.toggle("dark");
+      }
+
+      let getStatus = localStorage.getItem("status");
+      if (getStatus && getStatus === "close") {
+        sidebar.classList.toggle("close");
+      }
+
+      modeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        if (body.classList.contains("dark")) {
+          localStorage.setItem("mode", "dark");
+        } else {
+          localStorage.setItem("mode", "light");
         }
+      });
 
-        subjects.forEach(subjectInfo => generateCard(subjectInfo, userNames[Math.floor(Math.random() * userNames.length)]));
-   
-
-        const body = document.querySelector("body"),
-            modeToggle = body.querySelector(".mode-toggle");
-        sidebar = body.querySelector("nav");
-        sidebarToggle = body.querySelector(".sidebar-toggle");
-
-        let getMode = localStorage.getItem("mode");
-        if (getMode && getMode === "dark") {
-            body.classList.toggle("dark");
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        if (sidebar.classList.contains("close")) {
+          localStorage.setItem("status", "close");
+        } else {
+          localStorage.setItem("status", "open");
         }
+      });
 
-        let getStatus = localStorage.getItem("status");
-        if (getStatus && getStatus === "close") {
-            sidebar.classList.toggle("close");
-        }
+      const buttons = document.querySelectorAll(".trigger[data-modal-trigger]");
 
-        modeToggle.addEventListener("click", () => {
-            body.classList.toggle("dark");
-            if (body.classList.contains("dark")) {
-                localStorage.setItem("mode", "dark");
-            } else {
-                localStorage.setItem("mode", "light");
-            }
+      for (let button of buttons) {
+        modalEvent(button);
+      }
+
+      function modalEvent(button) {
+        button.addEventListener("click", () => {
+          const trigger = button.getAttribute("data-modal-trigger");
+          // console.log('trigger', trigger)
+          const modal = document.querySelector(`[data-modal=${trigger}]`);
+          console.log("modal", modal);
+          const contentWrapper = modal.querySelector(".content-wrapper");
+          const close = modal.querySelector(".close");
+
+          close.addEventListener("click", () => modal.classList.remove("open"));
+          modal.addEventListener("click", () => modal.classList.remove("open"));
+          contentWrapper.addEventListener("click", (e) => e.stopPropagation());
+
+          modal.classList.toggle("open");
         });
-
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-            if (sidebar.classList.contains("close")) {
-                localStorage.setItem("status", "close");
-            } else {
-                localStorage.setItem("status", "open");
-            }
-        });
-
-        const buttons = document.querySelectorAll('.trigger[data-modal-trigger]');
-
-        for (let button of buttons) {
-            modalEvent(button);
-        }
-
-        function modalEvent(button) {
-            button.addEventListener('click', () => {
-                const trigger = button.getAttribute('data-modal-trigger');
-                // console.log('trigger', trigger)
-                const modal = document.querySelector(`[data-modal=${trigger}]`);
-                console.log('modal', modal)
-                const contentWrapper = modal.querySelector('.content-wrapper');
-                const close = modal.querySelector('.close');
-
-                close.addEventListener('click', () => modal.classList.remove('open'));
-                modal.addEventListener('click', () => modal.classList.remove('open'));
-                contentWrapper.addEventListener('click', (e) => e.stopPropagation());
-
-                modal.classList.toggle('open');
-            });
-        }
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
